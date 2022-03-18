@@ -100,11 +100,6 @@ function getData(path) {
     
        .then(function (resp) { return resp.json() })
        .then(function (data) {
-          console.log(data); 
-          var data_a = data.map(function (e) {
-            return [e.time, e.mean];
-          });
-          console.log(data_a);
           var meas_name = '';
           if(path === 'temp'){
           var meas_name= 'Temperature';
@@ -117,6 +112,67 @@ function getData(path) {
           }
           console.log(path);
        plotlyJS(data, meas_name, path);
+       return data
+       })
+       .then(function (data) {
+        var data_a = data.map(function (e) {
+            return [e.time, e.mean];
+          });
+           console.log('data' + data);
+        Highcharts.chart('container', {
+            chart: {
+                type: 'spline',
+                inverted: false
+            },
+            title: {
+                text: 'Temperature'
+            },
+            subtitle: {
+                text: 'Last 7 days'
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    minute: '%d %b %Y %H:%M'
+                },
+                startOnTick: true,
+                endOnTick: true,
+                showLastLabel: true,
+                labels: {
+                    rotation: -45
+                },
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature'
+                },
+                labels: {
+                    format: '{value}°C'
+                },
+                accessibility: {
+                    rangeDescription: 'Range: -10 to 30°C'
+                },
+                lineWidth: 2
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br/>',
+                pointFormat: '{point.x} km: {point.y}°C'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enable: false
+                    }
+                }
+            },
+            series: [{
+                name: 'Humidity',
+                data: data_a
+            }]
+        });
        })
        .catch(function () {
           // catch any errors

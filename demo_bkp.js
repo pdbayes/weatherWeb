@@ -100,6 +100,11 @@ function getData(path) {
     
        .then(function (resp) { return resp.json() })
        .then(function (data) {
+          console.log(data); 
+          var data_a = data.map(function (e) {
+            return [e.time, e.mean];
+          });
+          console.log(data_a);
           var meas_name = '';
           if(path === 'temp'){
           var meas_name= 'Temperature';
@@ -112,68 +117,6 @@ function getData(path) {
           }
           console.log(path);
        plotlyJS(data, meas_name, path);
-       return data
-       })
-       .then(function (data) {
-           var data = Object.values(data);
-           console.log('data' + data);
-        Highcharts.chart('container', {
-            chart: {
-                type: 'spline',
-                inverted: true
-            },
-            title: {
-                text: 'Atmosphere Temperature by Altitude'
-            },
-            subtitle: {
-                text: 'According to the Standard Atmosphere Model'
-            },
-            xAxis: {
-                reversed: false,
-                title: {
-                    enabled: true,
-                    text: 'Altitude'
-                },
-                labels: {
-                    format: '{value} km'
-                },
-                accessibility: {
-                    rangeDescription: 'Range: 0 to 80 km.'
-                },
-                maxPadding: 0.05,
-                showLastLabel: true
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature'
-                },
-                labels: {
-                    format: '{value}°'
-                },
-                accessibility: {
-                    rangeDescription: 'Range: -90°C to 20°C.'
-                },
-                lineWidth: 2
-            },
-            legend: {
-                enabled: false
-            },
-            tooltip: {
-                headerFormat: '<b>{series.name}</b><br/>',
-                pointFormat: '{point.x} km: {point.y}°C'
-            },
-            plotOptions: {
-                spline: {
-                    marker: {
-                        enable: false
-                    }
-                }
-            },
-            series: [{
-                name: 'Temperature',
-                data: data
-            }]
-        });
        })
        .catch(function () {
           // catch any errors
