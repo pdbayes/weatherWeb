@@ -100,6 +100,11 @@ function getData(path) {
     
        .then(function (resp) { return resp.json() })
        .then(function (data) {
+          console.log(data); 
+          var data_a = data.map(function (e) {
+            return [e.time, e.mean];
+          });
+          console.log(data_a);
           var meas_name = '';
           if(path === 'temp'){
           var meas_name= 'Temperature';
