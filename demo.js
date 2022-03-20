@@ -20,8 +20,8 @@ function startConnect() {
     // Connect the client, if successful, call onConnect function
     client.connect({
         onSuccess: onConnect,
-        userName : 'user1',
-	    password : '*64992Bayesp',
+        userName: 'user1',
+        password: '*64992Bayesp',
         useSSL: true
     });
 }
@@ -94,100 +94,120 @@ function updateScroll() {
 function getData(path) {
     var url = 'http://weathernode.tregrillfarmcottages.co.uk/' + path;
     fetch(url, {
-       credentials: "include",
-       credentials: 'same-origin'
+        credentials: "include",
+        credentials: 'same-origin'
     })
-    
-       .then(function (resp) { return resp.json() })
-       .then(function (data) {
-          var meas_name = '';
-          if(path === 'temp'){
-          var meas_name= 'Temperature';
-          }
-          else if(path === 'humidity'){
-          var meas_name = 'Humidity';
-          }
-          else{
-             var meas_name = 'error';
-          }
-          console.log(path);
-       plotlyJS(data, meas_name, path);
-       return data
-       })
-       .then(function (data) {
-        var data_a = data.map(function (e) {
-            return [e.time, e.mean];
-          });
-           console.log('data' + data);
-        Highcharts.chart('container', {
-            chart: {
-                type: 'spline',
-                inverted: false
-            },
-            title: {
-                text: 'Temperature'
-            },
-            subtitle: {
-                text: 'Last 7 days'
-            },
-            xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                    minute: '%d %b %Y %H:%M'
+
+        .then(function (resp) { return resp.json() })
+        .then(function (data) {
+            var meas_name = '';
+            if (path === 'temp') {
+                var meas_name = 'Temperature';
+            }
+            else if (path === 'humidity') {
+                var meas_name = 'Humidity';
+            }
+            else {
+                var meas_name = 'error';
+            }
+            // console.log(path);
+            return data
+        })
+        .then(function (data) {
+            var data_a = data.map(function (e) {
+                return [Date.parse(e.time), e.mean];
+            });
+
+            //var current = data_a[data_a.len - 1][1];
+            // console.log('current' + current);
+            console.log(data_a[168][1]);
+            var meas_name = '';
+            if (path === 'temp') {
+                var meas_name = 'Temperature';
+                var unit = '°C';
+            }
+            else if (path === 'humidity') {
+                var meas_name = 'Humidity';
+                var unit = '%'
+            }
+            else {
+                var meas_name = 'error';
+            }
+            div_name = 'container_' + path;
+
+            Highcharts.chart(div_name, {
+                chart: {
+                    type: 'spline',
+
                 },
-                startOnTick: true,
-                endOnTick: true,
-                showLastLabel: true,
-                labels: {
-                    rotation: -45
-                },
-            },
-            yAxis: {
+
                 title: {
-                    text: 'Temperature'
+                    text: meas_name
                 },
-                labels: {
-                    format: '{value}°C'
+                subtitle: {
+                    text: 'Last 7 days'
                 },
-                accessibility: {
-                    rangeDescription: 'Range: -10 to 30°C'
+                xAxis: {
+                    type: 'datetime'
                 },
-                lineWidth: 2
-            },
-            legend: {
-                enabled: false
-            },
-            tooltip: {
-                headerFormat: '<b>{series.name}</b><br/>',
-                pointFormat: '{point.x} km: {point.y}°C'
-            },
-            plotOptions: {
-                spline: {
-                    marker: {
-                        enable: false
+                yAxis: {
+                    title: {
+                        text: meas_name
+                    },
+                    labels: {
+                        format: '{value}' + unit
+                    },
+                    lineWidth: 2,
+                    min: -10,
+                    max: 30
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+
+                    pointFormat: '{point.y}°C'
+                },
+                plotOptions: {
+
+                    series: {
+
+                        threshold: -10,
+                        connectNulls: true
+                    },
+
+                },
+                series: [{
+                    type: 'spline',
+                    //name: meas_name,
+                    data: data_a,
+                    color: {
+                        //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        linearGradient: [ 0, 0, 0, 295],
+                        stops: [
+                            [0.00, 'red'],
+                            [0.3, 'orange'],
+                            [0.5, 'lightblue'],
+                            [1.00, 'Blue']
+                        ]
                     }
-                }
-            },
-            series: [{
-                name: 'Humidity',
-                data: data_a
-            }]
+                }]
+            });
+        })
+        .catch(function () {
+            // catch any errors
         });
-       })
-       .catch(function () {
-          // catch any errors
-       });
- }
+}
 
 function plotlyJS(vals, measurement, div_id) {
     // Bar chart
     // create chart data
     console.log(vals);
     var times = vals.map(function (e) {
-      return e.time;
+        return e.time;
     });
     var temps = vals.map(function (e) {
-      return e.mean;
+        return e.mean;
     });
     var trace1 = {
         x: times,
@@ -195,16 +215,18 @@ function plotlyJS(vals, measurement, div_id) {
         name: measurement,
         line: { shape: 'spline' },
         type: 'line'
-      };
-      var data = [trace1];
-      var layout = {
+    };
+    var data = [trace1];
+    var layout = {
         title: measurement + ' Last 7 Days',
         paper_bgcolor: "rgba(200,200,200,.2)",
-        yaxis: { title: '' , titlefont: { color: 'rgb(0,0,0)' },
-        tickfont: { color: 'rgb(0,0,0)' },
-        overlaying: 'y'}
-      };
+        yaxis: {
+            title: '', titlefont: { color: 'rgb(0,0,0)' },
+            tickfont: { color: 'rgb(0,0,0)' },
+            overlaying: 'y'
+        }
+    };
 
-      var config = { responsive: true }
-      Plotly.newPlot(div_id, data, layout, config);
+    var config = { responsive: true }
+    Plotly.newPlot(div_id, data, layout, config);
 }
