@@ -92,7 +92,7 @@ function updateScroll() {
 }
 
 function getData(path) {
-    var url = 'http://weathernode.tregrillfarmcottages.co.uk/' + path;
+    var url = 'https://weathernode.tregrillfarmcottages.co.uk/' + path;
     fetch(url, {
         credentials: "include",
         credentials: 'same-origin'
