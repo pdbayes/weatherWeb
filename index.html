@@ -20,19 +20,16 @@
       <div id="header" class="header">Our Weather</div>
       <div id="temp" class="chartl"></div>
       <div id="humidity" class="chartr"></div>
-      <figure class="highcharts-figure_l">
-         <div id="container_temp"></div>
-      </figure>
-      <figure class="highcharts-figure_r">
-         <div id="container_humidity"></div>
-      </figure>
-      <div id = 'container'></div>
+      <div id="pressure" class = 'chartl'></div>
+      <div id="rain" class = "chartr"></div>
    </div>
    <script>
 
 
       getData('temp');
       getData('humidity');
+      getData('pressure');
+      getData('rain');
       
 
    </script>

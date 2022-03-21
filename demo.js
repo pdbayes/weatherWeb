@@ -115,12 +115,17 @@ function getData(path) {
         })
         .then(function (data) {
             var data_a = data.map(function (e) {
-                return [Date.parse(e.time), e.mean];
+                if(path === 'rain'){
+                return [Date.parse(e.time), e.sum];
+                }
+                else{
+                    return [Date.parse(e.time), e.mean];
+                }
             });
 
             //var current = data_a[data_a.len - 1][1];
             // console.log('current' + current);
-            console.log(data_a[168][1]);
+            console.log(data_a[data_a.length-1][1]);
             var meas_name = '';
             if (path === 'temp') {
                 var meas_name = 'Temperature';
@@ -146,14 +151,39 @@ function getData(path) {
                     [1.00, 'White']
                 ]
             }
+            else if (path === 'pressure') {
+                var meas_name = 'Pressure HPA';
+                var unit = 'hpa'
+                var minScale = 950;
+                var maxScale = 1050;
+                var chartType = 'areaspline';
+                var stopCols = [
+                    [0.00, 'rgba(0,255,0,0.5)'],
+                    [0.4, 'rgba(252,232,3,0.5)'],
+                    [0.6, 'rgba(252,232,3,0.5'],
+                    [1.00, 'rgba(255,0,0,0.5)']
+                ]
+            }
+            else if (path === 'rain') {
+                var meas_name = 'Rain';
+                var unit = 'mm'
+                var minScale = 0;
+                var maxScale = 10;
+                var chartType = 'column';
+                var stopCols = [
+                    [0.00, 'blue'],
+                    [1.00, 'blue']
+                ]
+            }
             else {
                 var meas_name = 'error';
             }
-            div_name = 'container_' + path;
+            div_name = path;
 
             Highcharts.chart(div_name, {
                 chart: {
-                    type: 'spline',
+                    type: chartType,
+                    borderWidth: 3
 
                 },
 
@@ -167,9 +197,6 @@ function getData(path) {
                     type: 'datetime'
                 },
                 yAxis: {
-                    title: {
-                        text: meas_name
-                    },
                     labels: {
                         format: '{value}' + unit
                     },
@@ -188,7 +215,7 @@ function getData(path) {
 
                     series: {
 
-                        threshold: -10,
+                        threshold: minScale,
                         connectNulls: true
                     },
 
