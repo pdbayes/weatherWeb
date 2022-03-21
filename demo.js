@@ -125,10 +125,26 @@ function getData(path) {
             if (path === 'temp') {
                 var meas_name = 'Temperature';
                 var unit = '°C';
+                var minScale = -10;
+                var maxScale = 30;
+                var chartType = 'spline';
+                var stopCols = [
+                    [0.00, 'red'],
+                    [0.3, 'orange'],
+                    [0.5, 'lightblue'],
+                    [1.00, 'Blue']
+                ];
             }
             else if (path === 'humidity') {
                 var meas_name = 'Humidity';
                 var unit = '%'
+                var minScale = 0;
+                var maxScale = 100;
+                var chartType = 'areaspline';
+                var stopCols = [
+                    [0.00, 'rgba(0,0,255,0.2)'],
+                    [1.00, 'White']
+                ]
             }
             else {
                 var meas_name = 'error';
@@ -158,8 +174,8 @@ function getData(path) {
                         format: '{value}' + unit
                     },
                     lineWidth: 2,
-                    min: -10,
-                    max: 30
+                    min: minScale,
+                    max: maxScale
                 },
                 legend: {
                     enabled: false
@@ -178,18 +194,13 @@ function getData(path) {
 
                 },
                 series: [{
-                    type: 'spline',
+                    type: chartType,
                     //name: meas_name,
                     data: data_a,
                     color: {
                         //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
                         linearGradient: [ 0, 0, 0, 295],
-                        stops: [
-                            [0.00, 'red'],
-                            [0.3, 'orange'],
-                            [0.5, 'lightblue'],
-                            [1.00, 'Blue']
-                        ]
+                        stops: stopCols
                     }
                 }]
             });
