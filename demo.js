@@ -152,7 +152,7 @@ function getData(path) {
                 var maxScale = 100;
                 var chartType = 'areaspline';
                 var stopCols = [
-                    [0.00, 'rgba(0,0,255,0.2)'],
+                    [0.00, 'rgba(0,0,255,0.7)'],
                     [1.00, 'White']
                 ]
             }
@@ -161,12 +161,12 @@ function getData(path) {
                 var unit = 'hpa'
                 var minScale = 950;
                 var maxScale = 1050;
-                var chartType = 'areaspline';
+                var chartType = 'spline';
                 var stopCols = [
-                    [0.00, 'rgba(0,255,0,0.5)'],
-                    [0.4, 'rgba(252,232,3,0.5)'],
-                    [0.45, 'rgba(252,232,3,0.5'],
-                    [1.00, 'rgba(255,0,0,0.5)']
+                    [0.00, 'rgba(0,255,0,1)'],
+                    [0.4, 'rgba(252,232,3,1)'],
+                    [0.45, 'rgba(252,232,3,1'],
+                    [1.00, 'rgba(255,0,0,1)']
                 ]
             }
             else if (path === 'rain') {
@@ -218,20 +218,30 @@ function getData(path) {
                         }
                     },
                     type: chartType,
-                    borderWidth: 3
+                    borderWidth: 1,
+                    
+
+                      
 
                 },
 
                 margin: [0, 0, 0, 0],
 
                 title: {
-                    text: meas_name
+                    text: meas_name,
+                    style: {
+                        color: '#fff',
+                        fontWeight: 'bold',
+            
+                     } 
                 },
                 subtitle: {
-                    text: 'Last 7 days'
+                    text: 'Current ' + meas_name + ' is ' + data_a[data_a.length - 1][1].toFixed(2) + unit
                 },
                 xAxis: {
-                    type: 'datetime'
+                    type: 'datetime',
+                    gridLineColor: '#666666',
+                    gridLineWidth: .5
                 },
                 yAxis: {
                     labels: {
@@ -239,7 +249,9 @@ function getData(path) {
                     },
                     lineWidth: 2,
                     min: minScale,
-                    max: maxScale
+                    max: maxScale,
+                    gridLineColor: '#666666',
+                    gridLineWidth: 1
                 },
                 legend: {
                     enabled: false
@@ -257,6 +269,10 @@ function getData(path) {
                     },
 
                 },
+                credits: {
+                    enabled: false
+                },
+                
                 series: [{
                     type: chartType,
                     //name: meas_name,
