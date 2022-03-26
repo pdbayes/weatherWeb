@@ -118,13 +118,13 @@
     padding-left: 10px;
 }
 .header {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(640px, 1fr));
     color: transparent;
     background: url(images/clouds.jpg);
     background-size: 100% 100%;
     background-clip:text;
     -webkit-background-clip: text;
-    font-size: 4rem;
+    font-size: 10vw;
     font-weight: 700;
     display: flex;
     margin: 0;

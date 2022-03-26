@@ -79,7 +79,7 @@ function temperature() {
                 rotation: 'auto'
             },
             title: {
-                text: 'MPH'
+                text: '°C'
             },
             plotBands: [{
                 from: -10,

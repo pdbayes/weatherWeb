@@ -79,7 +79,7 @@ function humidity() {
                 rotation: 'auto'
             },
             title: {
-                text: 'MPH'
+                text: '%z'
             },
             plotBands: [{
                 from: 0,

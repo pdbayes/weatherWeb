@@ -125,7 +125,6 @@ function getData(path) {
 
             //var current = data_a[data_a.len - 1][1];
             // console.log('current' + current);
-            console.log(data_a.length + ' ' + data_a[data_a.length - 1][1]);
             var meas_name = '';
             if (path === 'temp') {
                 var meas_name = 'Temperature';
@@ -193,9 +192,6 @@ function getData(path) {
                             var extremes = chart.plotBox.y;
                             var yMin = chart.plotBox.y;
                             var yMax = chart.plotBox.y + chart.plotBox.height;
-                            console.log('yAxis max/min' + yMax + '/' + yMin);
-                            console.log(chart.plotBox.y);
-                            console.log(chart.plotBox.height);
                             chart.series[0].update({
                                 color: {
                                     //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
@@ -203,25 +199,13 @@ function getData(path) {
                                     stops: stopCols
                                 }
                             })
-                        },
-                        update: function () {
-                            var chart = this;
-                            var extremes = chart.yAxis[0].getExtremes();
-                            var yMax = chart.yAxis[0].toPixels(extremes.max);
-                            var yMin = chart.yAxis[0].toPixels(extremes.min);
-                            console.log('yAxis max/min' + yMax + '/' + yMin);
-                            chart.series[0].color = {
-                                //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                                linearGradient: [0, yMin, 0, yMax],
-                                stops: stopCols
-                            }
                         }
                     },
                     type: chartType,
                     borderWidth: 1,
-                    
 
-                      
+
+
 
                 },
 
@@ -232,8 +216,8 @@ function getData(path) {
                     style: {
                         color: '#fff',
                         fontWeight: 'bold',
-            
-                     } 
+
+                    }
                 },
                 subtitle: {
                     text: 'Current ' + meas_name + ' is ' + data_a[data_a.length - 1][1].toFixed(2) + unit
@@ -241,17 +225,31 @@ function getData(path) {
                 xAxis: {
                     type: 'datetime',
                     gridLineColor: '#666666',
-                    gridLineWidth: .5
+                    gridLineWidth: .5,
+                    labels: {
+                        style: {
+                            color: '#f9f9f9'
+                        }
+                    },
                 },
                 yAxis: {
                     labels: {
-                        format: '{value}' + unit
+                        format: '{value}' + unit,
+                        align: 'left',
+                        x: 0,
+                        y: -2,
+                        style: {
+                            color: '#f9f9f9'
+                        }
                     },
-                    lineWidth: 2,
+                    lineWidth: 1,
                     min: minScale,
                     max: maxScale,
                     gridLineColor: '#666666',
-                    gridLineWidth: 1
+                    gridLineWidth: .5,
+                    title: {
+                        text: null
+                    }
                 },
                 legend: {
                     enabled: false
@@ -272,7 +270,7 @@ function getData(path) {
                 credits: {
                     enabled: false
                 },
-                
+
                 series: [{
                     type: chartType,
                     //name: meas_name,
@@ -282,7 +280,85 @@ function getData(path) {
                         linearGradient: [0, 0, 0, 0],
                         stops: stopCols
                     }
-                }]
+                }],
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        // Make the labels less space demanding on mobile
+                        chartOptions: {
+                            xAxis: {
+                                type: 'datetime',
+                                gridLineColor: '#666666',
+                                gridLineWidth: .5,
+                                labels: {
+                                    style: {
+                                        color: '#f9f9f9'
+                                    }
+                                },
+                            },
+                            yAxis: {
+                                labels: {
+                                    align: 'left',
+                                    x: 0,
+                                    y: -2
+                                },
+                                title: {
+                                    text: null,
+                                    style: {
+                                        color: '#f9f9f9'
+                                    }
+                                },
+                                lineWidth: 1,
+                                min: minScale,
+                                max: maxScale,
+                                gridLineColor: '#666666',
+                                gridLineWidth: .5,
+                                title: {
+                                    text: null
+                                }
+                            }
+                        }
+                    }, {
+                            condition: {
+                            minWidth: 501
+                        },
+                        chartOptions: {
+                            xAxis: {
+                                type: 'datetime',
+                                gridLineColor: '#666666',
+                                gridLineWidth: .5,
+                                labels: {
+                                    style: {
+                                        color: '#f9f9f9'
+                                    }
+                                },
+                            },
+                             yAxis: {
+                                  labels: {
+                                          align: 'right',
+                                      x: -15,
+                                      y: 0,
+                                      style: {
+                                        color: '#f9f9f9'
+                                    }
+                                  },
+                                  title: {
+                                      text: null
+                                  },
+                                  lineWidth: 1,
+                                  min: minScale,
+                                  max: maxScale,
+                                  gridLineColor: '#666666',
+                                  gridLineWidth: .5,
+                                  title: {
+                                      text: null
+                                  }
+                              },
+                        }
+                    }]
+                },
             });
         })
         .catch(function () {

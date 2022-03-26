@@ -79,7 +79,7 @@ function pressure() {
                 rotation: 'auto'
             },
             title: {
-                text: 'Pressure'
+                text: 'HPA'
             },
             plotBands: [{
                 from: 950,
