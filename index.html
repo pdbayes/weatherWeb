@@ -18,12 +18,25 @@
    <script src="humidity.js"></script>
    <script src ="temperature.js"></script>
    <script src ="pressure.js"></script>
+   <link rel="stylesheet" href="fixed-navigation-bar.css">
+   <link rel="stylesheet" href="assets/base.css">
 
 </head>
 
 <body>
+   <nav class="fixed-nav-bar">
+      <div id="menu" class="menu">
+        <a class="sitename" href="index.html">Our Weather</a>
+        <!-- Example responsive navigation menu  -->
+        <a class="show" href="#menu">Menu</a><a class="hide" href="#hidemenu">Menu</a>
+        <ul class="menu-items">
+          <li><a href="index.html">Current</a></li>
+          <li><a href="historical.html">Historical</a></li>
+          <li><a href="forecast.html">Forecast</a></li>
+      </ul>
+      </div>
+    </nav>
    <div class="wrapper">
-      <div id="header" class="header">Our Weather</div>
       
       <section class='charts'>
          <div id="temperature"></div>
@@ -33,9 +46,6 @@
          <div id="speed"></div>
          
       </section>
-      <div class = link>
-      <a href="historical.html">For historical weather info click here</a>
-   </div>
    </div>
    <script>
 $( document ).ready(function() {

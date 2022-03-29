@@ -126,8 +126,29 @@ function temperature() {
         }]
 
     },
+    function(chart){
+        var url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/current';
+        fetch(url, {
+            credentials: "include",
+            credentials: 'same-origin'
+        })
 
-    function (chart) {
+    .then(function (resp) { return resp.json() })
+    .then(function (data) {
+        
+        var speed = data.map(function (e) {
+            return e.temperatureInC;
+        })
+        var speed_point = chart.series[0].points[0];
+        var speedVal;
+        speedVal = speed;
+        console.log(speedVal);
+        speed_point.update(speedVal);
+return chart;
+})
+.then(function (chart) {
+
+    
         if (!chart.renderer.forExport) {
             setInterval(function () {
                 var url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/current';
@@ -151,5 +172,8 @@ function temperature() {
             })
         },10000); 
     }
+
 })
+}
+)
 };

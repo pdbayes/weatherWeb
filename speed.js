@@ -106,7 +106,28 @@ function speed() {
 
     },
 
-    function (chart) {
+    function(chart){
+        var url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
+        fetch(url, {
+            credentials: "include",
+            credentials: 'same-origin'
+        })
+
+    .then(function (resp) { return resp.json() })
+    .then(function (data) {
+        
+        var speed = data.map(function (e) {
+            return e.avSpeed;
+        })
+        var speed_point = chart.series[0].points[0];
+        var speedVal;
+        speedVal = speed;
+        console.log(speedVal);
+        speed_point.update(speedVal);
+        return chart;
+
+    })
+    .then(function (chart) {
         if (!chart.renderer.forExport) {
             setInterval(function () {
                 var url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
@@ -130,5 +151,8 @@ function speed() {
             })
         },10000); 
     }
+
 })
+}
+)
 };

@@ -17,8 +17,8 @@ function pressure() {
             style: {
                 color: '#fff',
                 fontWeight: 'bold',
-    
-             }    
+
+            }
         },
         exporting: {
             enabled: false
@@ -83,10 +83,10 @@ function pressure() {
             },
             plotBands: [{
                 from: 950,
-                to: 1005,
+                to: 990,
                 color: '#55BF3B' // green
             }, {
-                from: 1005,
+                from: 990,
                 to: 1010,
                 color: '#DDDF0D' // yellow
             }, {
@@ -105,29 +105,56 @@ function pressure() {
         }]
     },
 
-    function (chart) {
-        if (!chart.renderer.forExport) {
-            setInterval(function () {
-                var url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure/current';
-                fetch(url, {
-                    credentials: "include",
-                    credentials: 'same-origin'
-                })
-
-            .then(function (resp) { return resp.json() })
-            .then(function (data) {
-                
-                var speed = data.map(function (e) {
-                    return e.pressureHpa;
-                })
-                var speed_point = chart.series[0].points[0];
-                var speedVal;
-                speedVal = speed;
-                console.log(speedVal);
-                speed_point.update(speedVal);
-                
+        function (chart) {
+            var url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure/current';
+            fetch(url, {
+                credentials: "include",
+                credentials: 'same-origin'
             })
-        },10000); 
-    }
-})
+
+                .then(function (resp) { return resp.json() })
+                .then(function (data) {
+
+                    var speed = data.map(function (e) {
+                        return e.pressureHpa;
+                    })
+                    var speed_point = chart.series[0].points[0];
+                    var speedVal;
+                    speedVal = speed;
+                    console.log(speedVal);
+                    speed_point.update(speedVal);
+                    return chart;
+
+                })
+                .then(function (chart) {
+
+
+                    if (!chart.renderer.forExport) {
+                        setInterval(function () {
+                            var url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure/current';
+                            fetch(url, {
+                                credentials: "include",
+                                credentials: 'same-origin'
+                            })
+
+                                .then(function (resp) { return resp.json() })
+                                .then(function (data) {
+
+                                    var speed = data.map(function (e) {
+                                        return e.pressureHpa;
+                                    })
+                                    var speed_point = chart.series[0].points[0];
+                                    var speedVal;
+                                    speedVal = speed;
+                                    console.log(speedVal);
+                                    speed_point.update(speedVal);
+                                    return chart;
+
+                                })
+                        }, 10000);
+                    }
+
+                })
+            }
+)
 };
