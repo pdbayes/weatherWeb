@@ -44,36 +44,36 @@ function plotlyJS(hourly, path) {
     switch (path) {
         case 'temp':
             var data = hourly.map(function (e) {
-                return [e.dt *1000, celcius(e.temp)];
+                return [e.dt * 1000, celcius(e.temp)];
             });
-          break;
+            break;
         case 'humidity':
             var data = hourly.map(function (e) {
                 return [e.dt * 1000, e.humidity];
             });
-          break;
+            break;
         case 'pressure':
             var data = hourly.map(function (e) {
-                return [e.dt *1000, e.pressure];
+                return [e.dt * 1000, e.pressure];
             });
-          break;
+            break;
         case 'rain':
             var data = hourly.map(function (e) {
-                return [e.dt *1000, e.pop * 100];
+                return [e.dt * 1000, e.pop * 100];
             });
-          break;
+            break;
         case 'cloud':
             var data = hourly.map(function (e) {
-                return [e.dt *1000, e.clouds];
+                return [e.dt * 1000, e.clouds];
             });
-          break;
+            break;
         case 'uv':
             var data = hourly.map(function (e) {
-                return [e.dt *1000, e.uvi];
+                return [e.dt * 1000, e.uvi];
             });
-      }
-      console.log(data);
-      return data;
+    }
+    console.log(data);
+    return data;
 }
 
 
@@ -102,12 +102,13 @@ function getForecast(path) {
         })
         .then(function (data) {
             let hourly = data.hourly;
-            let data_a  = plotlyJS(hourly, path);
-            
+            let data_a = plotlyJS(hourly, path);
+
 
             //var current = data_a[data_a.len - 1][1];
             // console.log('current' + current);
             var meas_name = '';
+            var bands = null;
             if (path === 'temp') {
                 var meas_name = 'Temperature';
                 var unit = '°C';
@@ -180,16 +181,60 @@ function getForecast(path) {
                 var maxScale = 11;
                 var chartType = 'spline';
                 var stopCols = [
-                    [0, 'rgb(213, 62, 79)'],
-                    [0.1, 'rgb(244, 109, 67)'],
-                    [0.15, 'rgb(253,174,97)'],
-                    [0.2, 'rgb(254,224,139)'],
-                    [0.25, 'rgb(255, 255, 191)'],
-                    [0.3, 'rgb(230, 245, 152)'],
-                    [0.4, 'rgb(171, 221, 164)'],
-                    [0.45, 'rgb(102, 194, 165)'],
-                    [1, 'rgb(50, 136, 189)']
+                    [0, 'rgb(0,0,0)'],
+                    [1, 'rgb(0,0,0,0)']
                 ];
+                bands = [{ // Low
+                    from: 0,
+                    to: 2.5,
+                    color: 'green',
+                    label: {
+                        text: 'Low',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }, { // Light breeze
+                    from: 2.5,
+                    to: 5.5,
+                    color: 'yellow',
+                    label: {
+                        text: 'Moderate',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }, { // Gentle breeze
+                    from: 5.5,
+                    to: 7.5,
+                    color: 'orange',
+                    label: {
+                        text: 'High',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }, { // Moderate breeze
+                    from: 7.5,
+                    to: 10,
+                    color: 'red',
+                    label: {
+                        text: 'Very High',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }, { // Fresh breeze
+                    from: 10,
+                    to: 12,
+                    color: 'violet',
+                    label: {
+                        text: 'Extreme',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }]
             }
             else {
                 var meas_name = 'error';
@@ -268,7 +313,9 @@ function getForecast(path) {
                     gridLineWidth: .5,
                     title: {
                         text: null
-                    }
+                    },
+                    plotBands: bands
+
                 },
                 legend: {
                     enabled: false
@@ -298,6 +345,9 @@ function getForecast(path) {
                         //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
                         linearGradient: [0, 0, 0, 0],
                         stops: stopCols
+                    },
+                    marker: {
+                        enabled: false
                     }
                 }],
                 responsive: {
