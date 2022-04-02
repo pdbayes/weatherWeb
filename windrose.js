@@ -29,13 +29,11 @@ function windrose() {
                     var data_a = min_dat.map(function (e) {
                         return [e.mode, e.mean];
                     })
-                    console.log('mean' + data_a);
                 }
                 else {
                     var data_a = min_dat.map(function (e) {
                         return [e.mode, e.max];
                     })
-                    console.log('gust' + data_a);
                 }
                 for (const x of data_a) {
                     array[x[0]] += 1;
@@ -104,7 +102,8 @@ function windrose() {
 
                 chart: {
                     polar: true,
-                    type: 'column'
+                    type: 'column',
+                    borderWidth: 1
                 },
 
                 title: {

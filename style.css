@@ -41,7 +41,15 @@
 }
 
 .choice {
-    background: white;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    margin: 2px;
+    padding: 1px;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    color: white;
 }
 
 .charts {
@@ -62,4 +70,14 @@ background-color: black;
   }
 .drop {
     min-width: 100%;
+}
+.buttonGust {
+    border-radius: 5px;
+    margin: 0;
+    padding: 1px;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    color: white;
+
 }

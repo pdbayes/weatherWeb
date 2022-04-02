@@ -109,6 +109,7 @@ function getForecast(path) {
             // console.log('current' + current);
             var meas_name = '';
             var bands = null;
+            var tickInt = null;
             if (path === 'temp') {
                 var meas_name = 'Temperature';
                 var unit = '°C';
@@ -181,60 +182,61 @@ function getForecast(path) {
                 var maxScale = 11;
                 var chartType = 'spline';
                 var stopCols = [
-                    [0, 'rgb(0,0,0)'],
-                    [1, 'rgb(0,0,0,0)']
+                    [0, 'rgb(255,255,255)'],
+                    [1, 'rgb(255,255,255)']
                 ];
                 bands = [{ // Low
                     from: 0,
-                    to: 2.5,
-                    color: 'green',
+                    to: 3,
+                    color: 'rgba(0,128,0,0.3',
                     label: {
                         text: 'Low',
                         style: {
-                            color: 'black'
+                            color: 'white'
                         }
                     }
                 }, { // Light breeze
-                    from: 2.5,
-                    to: 5.5,
-                    color: 'yellow',
+                    from: 3,
+                    to: 6,
+                    color: 'rgba(255,255,0,0.3',
                     label: {
                         text: 'Moderate',
                         style: {
-                            color: 'black'
+                            color: 'white'
                         }
                     }
                 }, { // Gentle breeze
-                    from: 5.5,
-                    to: 7.5,
-                    color: 'orange',
+                    from: 6,
+                    to: 8,
+                    color: 'rgba(255,127,0,0.3',
                     label: {
                         text: 'High',
                         style: {
-                            color: 'black'
+                            color: 'white'
                         }
                     }
                 }, { // Moderate breeze
-                    from: 7.5,
+                    from: 8,
                     to: 10,
-                    color: 'red',
+                    color: 'rgba(255,0,0,0.3)',
                     label: {
                         text: 'Very High',
                         style: {
-                            color: 'black'
+                            color: 'white'
                         }
                     }
                 }, { // Fresh breeze
                     from: 10,
                     to: 12,
-                    color: 'violet',
+                    color: 'rgba(238,130,238,0.3)',
                     label: {
                         text: 'Extreme',
                         style: {
-                            color: 'black'
+                            color: 'white'
                         }
                     }
-                }]
+                }];
+                tickInt = 1;
             }
             else {
                 var meas_name = 'error';
@@ -413,6 +415,7 @@ function getForecast(path) {
                                         color: '#f9f9f9'
                                     }
                                 },
+                                tickInterval: tickInt,
                                 title: {
                                     text: null
                                 },
