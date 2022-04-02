@@ -25,11 +25,14 @@ function getData(path) {
                 if (path === 'rain') {
                     return [Date.parse(e.time), e.sum];
                 }
+                else if (path === 'wind') {
+                    return [Date.parse(e.time), e.mean, e.max];
+                }
                 else {
                     return [Date.parse(e.time), e.mean];
                 }
             });
-
+            
             //var current = data_a[data_a.len - 1][1];
             // console.log('current' + current);
             var meas_name = '';
@@ -88,6 +91,15 @@ function getData(path) {
                 ]
             }
             else if (path === 'wind') {
+                var data_b = [];
+                for(let i = 0; i < data_a.length; i++) {
+  
+                    
+                      data_b.push([data_a[i][0], data_a[i][2]]);
+                       
+                    }
+                    console.log(data_b);
+
                 var meas_name = 'windspeed';
                 var unit = 'mph';
                 var minScale = 0;
@@ -109,8 +121,8 @@ function getData(path) {
                 var meas_name = 'error';
             }
             div_name = path;
-
-            Highcharts.chart(div_name, {
+            var chart_id = path + 'ChartId';
+            let chart = Highcharts.chart(div_name, {
                 chart: {
                     events: {
                         load: function () {
@@ -184,7 +196,7 @@ function getData(path) {
                 },
                 tooltip: {
 
-                    pointFormat: '{point.y}°C'
+                    pointFormat: '{point.y} ' + unit
                 },
                 plotOptions: {
 
@@ -253,7 +265,9 @@ function getData(path) {
                             minWidth: 501
                         },
                         chartOptions: {
-                            xAxis: {
+                            xAxis: [{
+                                id: '0',
+                                 
                                 type: 'datetime',
                                 gridLineColor: '#666666',
                                 gridLineWidth: .5,
@@ -262,7 +276,12 @@ function getData(path) {
                                         color: '#f9f9f9'
                                     }
                                 },
-                            },
+                                },{
+                                    id: '1',
+                                  type: 'datetime',
+                                  visible: false,
+                                  linkedTo: '0'
+                                  }],
                              yAxis: {
                                   labels: {
                                           align: 'right',
@@ -288,8 +307,55 @@ function getData(path) {
                     }]
                 }
             });
+            $("#gust").on('click', function () {
+                    
+                    chart.addSeries({
+                        xAxis: '1',
+                      type: 'spline',
+                      name: 'gust',
+                      data: data_b,
+                      marker: {
+                        enabled: false
+                      },
+                      color: {
+                        //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        linearGradient: [0, 0, 0, 0],
+                        stops: stopCols
+                    },
+                      states: {
+                        hover: {
+                          lineWidth: 2
+                        }
+                      },
+                      enableMouseTracking: true
+                    });
+                    var extremes = chart.plotBox.y;
+                    var yMin = chart.plotBox.y;
+                    var yMax = chart.plotBox.y + chart.plotBox.height;
+                    
+                    chart.series[0].update({
+                        color: {
+                            //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                            linearGradient: [0, yMin, 0, yMax],
+                            stops: stopCols
+                        }
+                    })
+                    chart.series[1].update({
+                        color: {
+                            //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                            linearGradient: [0, yMin, 0, yMax],
+                            stops: stopCols
+                        }
+                    })
+                
+                
+                
+            });
         })
         .catch(function () {
             // catch any errors
         });
+
+
+        
 };
