@@ -36,12 +36,14 @@ function getData(path) {
             //var current = data_a[data_a.len - 1][1];
             // console.log('current' + current);
             var meas_name = '';
+            var legend = false;
+            var chartType = 'spline';
+            var chartType_b = 'column';
             if (path === 'temp') {
                 var meas_name = 'Temperature';
                 var unit = '°C';
                 var minScale = -10;
                 var maxScale = 30;
-                var chartType = 'spline';
                 var stopCols = [
                     [0, 'rgb(213, 62, 79)'],
                     [0.1, 'rgb(244, 109, 67)'],
@@ -59,7 +61,6 @@ function getData(path) {
                 var unit = '%'
                 var minScale = 0;
                 var maxScale = 100;
-                var chartType = 'spline';
                 var stopCols = [
                     [0.00, 'rgba(0,175,255,0.9)'],
                     [1.00, 'rgba(0,175,255,0.4)']
@@ -71,7 +72,6 @@ function getData(path) {
                 var unit = 'hpa'
                 var minScale = 950;
                 var maxScale = 1050;
-                var chartType = 'spline';
                 var stopCols = [
                     [0.00, 'rgba(0,255,0,1)'],
                     [0.4, 'rgba(252,232,3,1)'],
@@ -84,7 +84,8 @@ function getData(path) {
                 var unit = 'mm'
                 var minScale = 0;
                 var maxScale = 10;
-                var chartType = 'column';
+                chartType = 'column';
+                chartType_b = 'spline';
                 var stopCols = [
                     [0.00, 'blue'],
                     [1.00, 'blue']
@@ -98,13 +99,19 @@ function getData(path) {
                       data_b.push([data_a[i][0], data_a[i][2]]);
                        
                     }
-                    console.log(data_b);
-
+                legend = {
+                    align: 'bottom',
+                    verticalAlign: 'top',
+                    layout: 'horizontal',
+                    itemStyle: {
+                        color: '#fff',
+                        fontWeight: 'bold'
+                    }
+                };
                 var meas_name = 'windspeed';
                 var unit = 'mph';
                 var minScale = 0;
                 var maxScale = null;
-                var chartType = 'spline';
                 var stopCols = [
                     [0, 'rgb(213, 62, 79)'],
                     [0.1, 'rgb(244, 109, 67)'],
@@ -122,6 +129,46 @@ function getData(path) {
             }
             div_name = path;
             var chart_id = path + 'ChartId';
+            var series_opt = {
+                type: chartType,
+                //name: meas_name,
+                data: data_a,
+                color: {
+                    //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                    linearGradient: [0, 0, 0, 0],
+                    stops: stopCols
+                }
+            };
+            var series_opt_b = {
+                type: chartType,
+                //name: meas_name,
+                data: []
+            };
+            if(path === 'wind'){
+                    series_opt = {
+                    type: chartType,
+                    name: 'Ave',
+                    //name: meas_name,
+                    data: data_a,
+                    color: {
+                        //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        linearGradient: [0, 0, 0, 0],
+                        stops: stopCols
+                    }
+                };
+                    series_opt_b = {
+                    type: chartType,
+                    name: 'Gust',
+                    //name: meas_name,
+                    data: data_b,
+                    color: {
+                        //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                        linearGradient: [0, 0, 0, 0],
+                        stops: stopCols
+                    }
+                };
+            };
+
             let chart = Highcharts.chart(div_name, {
                 chart: {
                     events: {
@@ -148,6 +195,59 @@ function getData(path) {
 
 
                 },
+                exporting: {
+                    buttons: {
+                      contextButton: {
+                        menuItems: [{
+                          text: 'Original',
+                          onclick: function() {
+                            chart.update({
+                              chart: {
+                                inverted: false,
+                                polar: false
+                              }
+                            });
+                            chart.series[0].update({
+                                type: chartType
+                            });
+                            chart.series[1].update({
+                                type: chartType
+                            });
+                          }
+                        }, {
+                          text: 'Bar',
+                          onclick: function() {
+                            chart.update({
+                              chart: {
+                                inverted: false,
+                                polar: false,
+                                type: chartType_b
+                              }
+                            });
+                            chart.series[0].update({
+                                type: chartType_b,
+                                
+                            });
+                            chart.series[1].update({
+                                type: chartType_b,
+                                
+                            });
+                          }
+                        }, {
+                          text: 'Polar',
+                          onclick: function() {
+                            chart.update({
+                              chart: {
+                                inverted: false,
+                                polar: true
+                              }
+                            });
+                          }
+                        }]
+                      }
+                    }
+                  },
+                 legend: legend,
 
                 margin: [0, 0, 0, 0],
 
@@ -191,9 +291,6 @@ function getData(path) {
                         text: null
                     }
                 },
-                legend: {
-                    enabled: false
-                },
                 tooltip: {
 
                     pointFormat: '{point.y} ' + unit
@@ -211,16 +308,7 @@ function getData(path) {
                     enabled: false
                 },
 
-                series: [{
-                    type: chartType,
-                    //name: meas_name,
-                    data: data_a,
-                    color: {
-                        //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                        linearGradient: [0, 0, 0, 0],
-                        stops: stopCols
-                    }
-                }],
+                series: [series_opt, series_opt_b],
                 responsive: {
                     rules: [{
                         condition: {
@@ -307,50 +395,7 @@ function getData(path) {
                     }]
                 }
             });
-            $("#gust").on('click', function () {
-                    
-                    chart.addSeries({
-                        xAxis: '1',
-                      type: 'spline',
-                      name: 'gust',
-                      data: data_b,
-                      marker: {
-                        enabled: false
-                      },
-                      color: {
-                        //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                        linearGradient: [0, 0, 0, 0],
-                        stops: stopCols
-                    },
-                      states: {
-                        hover: {
-                          lineWidth: 2
-                        }
-                      },
-                      enableMouseTracking: true
-                    });
-                    var extremes = chart.plotBox.y;
-                    var yMin = chart.plotBox.y;
-                    var yMax = chart.plotBox.y + chart.plotBox.height;
-                    
-                    chart.series[0].update({
-                        color: {
-                            //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                            linearGradient: [0, yMin, 0, yMax],
-                            stops: stopCols
-                        }
-                    })
-                    chart.series[1].update({
-                        color: {
-                            //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                            linearGradient: [0, yMin, 0, yMax],
-                            stops: stopCols
-                        }
-                    })
-                
-                
-                
-            });
+
         })
         .catch(function () {
             // catch any errors
