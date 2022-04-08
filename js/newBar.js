@@ -1,30 +1,21 @@
-function compass() {
-    let comp_chart = Highcharts.chart(
-        'compass',
+$(function () {
+    $('#container').highcharts(
         {
             chart: {
                 type: 'gauge',
-                plotBackgroundColor: 'transparent',
+                plotBackgroundColor: null,
                 plotBackgroundImage: null,
                 plotBorderWidth: 0,
                 plotShadow: true,
             },
 
             title: {
-                text: 'Wind Direction',
-                style: {
-                    color: '#fff',
-                    fontWeight: 'bold',
-                },
+                text: 'Kompass',
             },
-            exporting: {
-                enabled: false,
-            },
-            credits: false,
 
             pane: {
-                startAngle: 0,
-                endAngle: 360,
+                startAngle: -150,
+                endAngle: 150,
                 background: [
                     {
                         borderWidth: 1,
@@ -67,28 +58,28 @@ function compass() {
                     },
                     {
                         backgroundColor: '#DDD',
-                        borderWidth: 4,
+                        borderWidth: 1,
                         outerRadius: '105%',
                         innerRadius: '100%',
                     },
                 ],
             },
             // the value axis
-            ÌyAxis: [
+            yAxis: [
                 {
                     title: {
                         text: '',
                     },
                     min: 0,
                     max: 360,
-                    lineColor: '#333',
-                    offset: -10,
-                    tickInterval: 20,
-                    tickWidth: 2,
+                    lineColor: '#',
+                    offset: -0,
+                    tickInterval: 50,
+                    tickWidth: 4,
                     tickPosition: 'outside',
                     tickLength: 10,
                     tickColor: '#333',
-                    minorTickInterval: 5,
+                    minorTickInterval: 10,
                     minorTickWidth: 1,
                     minorTickLength: 10,
                     minorTickPosition: 'outside',
@@ -104,37 +95,27 @@ function compass() {
                         text: '',
                     },
                     type: 'category',
-                    categories: [
-                        'N',
-                        'NE',
-                        'E',
-                        'SE',
-                        'S',
-                        'SW',
-                        'W',
-                        'NW',
-                        'N',
-                    ],
+                    categories: ['Rain', 'Change', 'Sunny'],
                     min: 0,
-                    max: 8,
+                    max: 3,
                     lineColor: '#ddd',
-                    offset: -50,
+                    offset: -40,
                     tickInterval: 1,
-                    tickWidth: 1,
+                    tickWidth: 0,
                     tickPosition: 'outside',
-                    tickLength: 40, // =50-10
+                    tickLength: 30, // =50-10
                     tickColor: '#ddd',
                     minorTickInterval: 1,
-                    minorTickWidth: 0,
-                    minorTickLength: 50,
+                    minorTickWidth: 1,
+                    minorTickLength: 5,
                     minorTickPosition: 'inside',
                     minorTickColor: '#0f0',
                     labels: {
                         step: 1,
-                        distance: 2,
+                        distance: 1,
                         rotation: 'auto',
                     },
-                    endOnTick: true,
+                    endOnTick: false,
                 },
                 {
                     type: 'number',
@@ -145,15 +126,15 @@ function compass() {
                         enabled: false,
                     },
                     min: 0,
-                    max: 12,
+                    max: 6,
                     lineColor: '#ddd',
-                    offset: -50,
-                    tickInterval: 10,
-                    tickWidth: 1,
+                    offset: -40,
+                    tickInterval: 90,
+                    tickWidth: 5,
                     tickPosition: 'inside',
-                    tickLength: 45,
+                    tickLength: 10,
                     tickColor: '#ddd',
-                    minorTickWidth: 0,
+                    minorTickWidth: 4,
                     endOnTick: false,
                 },
             ],
@@ -191,57 +172,23 @@ function compass() {
                 },
             ],
         },
-
+        // Add some life
         function (chart) {
-            var url =
-                'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
-            fetch(url, {
-                credentials: 'include',
-                credentials: 'same-origin',
-            })
-                .then(function (resp) {
-                    return resp.json();
-                })
-                .then(function (data) {
-                    var data_a = data.map(function (e) {
-                        return e.quadrant * 22.5;
-                    });
+            if (!chart.renderer.forExport) {
+                setInterval(function () {
                     var point = chart.series[0].points[0];
                     var newVal;
-                    newVal = data_a;
+                    var inc = Math.round((Math.random() - 0.5) * 60);
+                    newVal = point.y + inc;
+                    if (newVal < 0 || newVal > 360) {
+                        newVal = point.y - inc;
+                    }
                     console.log(newVal);
                     point.update(newVal);
                     var point2 = chart.series[1].points[0];
                     point2.update(newVal);
-                    return chart;
-                })
-                .then(function (chart) {
-                    if (!chart.renderer.forExport) {
-                        setInterval(function () {
-                            var url =
-                                'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
-                            fetch(url, {
-                                credentials: 'include',
-                                credentials: 'same-origin',
-                            })
-                                .then(function (resp) {
-                                    return resp.json();
-                                })
-                                .then(function (data) {
-                                    var data_a = data.map(function (e) {
-                                        return e.quadrant * 22.5;
-                                    });
-                                    var point = chart.series[0].points[0];
-                                    var newVal;
-                                    newVal = data_a;
-                                    console.log(newVal);
-                                    point.update(newVal);
-                                    var point2 = chart.series[1].points[0];
-                                    point2.update(newVal);
-                                });
-                        }, 10000);
-                    }
-                });
+                }, 1000);
+            }
         }
     );
-}
+});
