@@ -74,7 +74,7 @@ function compass() {
                 ],
             },
             // the value axis
-            ÌyAxis: [
+            yAxis: [
                 {
                     title: {
                         text: '',
