@@ -10,7 +10,7 @@ $(function () {
             },
 
             title: {
-                text: 'Kompass',
+                text: 'Kompas',
             },
 
             pane: {
