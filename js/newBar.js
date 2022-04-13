@@ -3,66 +3,26 @@ $(function () {
         {
             chart: {
                 type: 'gauge',
-                plotBackgroundColor: null,
-                plotBackgroundImage: null,
+                //plotBackgroundImage: 'images/baro.png',
                 plotBorderWidth: 0,
-                plotShadow: true,
+                plotShadow: false,
+            height: 500,
+            width:500,
+            spacingTop: 15,
+            spacingRight: 15,
+            spacingBottom: 15,
+            spacingLeft: 15,
             },
 
-            title: {
-                text: 'Kompas',
+            title: null,
+            credits: {
+                enabled: false
             },
 
             pane: {
                 startAngle: -150,
                 endAngle: 150,
-                background: [
-                    {
-                        borderWidth: 1,
-                        outerRadius: '50%',
-                    },
-                    {
-                        backgroundColor: {
-                            linearGradient: {
-                                x1: 0,
-                                y1: 0,
-                                x2: 0,
-                                y2: 1,
-                            },
-                            stops: [
-                                [0, '#FFF'],
-                                [1, '#333'],
-                            ],
-                        },
-                        borderWidth: 4,
-                        outerRadius: '110%',
-                    },
-                    {
-                        backgroundColor: {
-                            linearGradient: {
-                                x1: 0,
-                                y1: 0,
-                                x2: 0,
-                                y2: 1,
-                            },
-                            stops: [
-                                [0, '#333'],
-                                [1, '#FFF'],
-                            ],
-                        },
-                        borderWidth: 4,
-                        outerRadius: '10%',
-                    },
-                    {
-                        // default background
-                    },
-                    {
-                        backgroundColor: '#DDD',
-                        borderWidth: 1,
-                        outerRadius: '105%',
-                        innerRadius: '100%',
-                    },
-                ],
+                background: null
             },
             // the value axis
             yAxis: [
@@ -70,124 +30,69 @@ $(function () {
                     title: {
                         text: '',
                     },
-                    min: 0,
-                    max: 360,
-                    lineColor: '#',
-                    offset: -0,
-                    tickInterval: 50,
-                    tickWidth: 4,
-                    tickPosition: 'outside',
-                    tickLength: 10,
-                    tickColor: '#333',
-                    minorTickInterval: 10,
-                    minorTickWidth: 1,
-                    minorTickLength: 10,
-                    minorTickPosition: 'outside',
-                    minorTickColor: '#666',
-                    labels: {
-                        step: 1,
-                        distance: -12,
-                        rotation: 'auto',
-                    },
-                },
-                {
-                    title: {
-                        text: '',
-                    },
-                    type: 'category',
-                    categories: ['Rain', 'Change', 'Sunny'],
-                    min: 0,
-                    max: 3,
-                    lineColor: '#ddd',
-                    offset: -40,
-                    tickInterval: 1,
+                    min: 950,
+                    max: 1055,
+                    lineColor: '#fff',
+                    lineWidth: 0,
+                    offset: 0,
+                    tickInterval: 0,
                     tickWidth: 0,
                     tickPosition: 'outside',
-                    tickLength: 30, // =50-10
-                    tickColor: '#ddd',
-                    minorTickInterval: 1,
-                    minorTickWidth: 1,
-                    minorTickLength: 5,
-                    minorTickPosition: 'inside',
-                    minorTickColor: '#0f0',
-                    labels: {
-                        step: 1,
-                        distance: 1,
-                        rotation: 'auto',
-                    },
-                    endOnTick: false,
-                },
-                {
-                    type: 'number',
-                    title: {
-                        text: '',
-                    },
-                    labels: {
-                        enabled: false,
-                    },
-                    min: 0,
-                    max: 6,
-                    lineColor: '#ddd',
-                    offset: -40,
-                    tickInterval: 90,
-                    tickWidth: 5,
-                    tickPosition: 'inside',
-                    tickLength: 10,
-                    tickColor: '#ddd',
-                    minorTickWidth: 4,
-                    endOnTick: false,
-                },
+                    tickLength: 0,
+                    tickColor: '#333',
+                    minorTickInterval: 0,
+                    minorTickWidth: 0,
+                    minorTickLength: 0,
+                    minorTickPosition: 'outside',
+                    minorTickColor: '#666',
+                }
+                
             ],
 
             series: [
+                
                 {
-                    name: 'Kompass',
+                    name: 'Barometer',
+                    dataLabels: {
+                        enabled: false
+                   },
                     yAxis: 0,
-                    data: [0],
+                    data: [950],
                     dial: {
-                        radius: '88%',
+                        radius: '78%',
                         baseWidth: 10,
                         baseLength: '0%',
-                        rearLength: 0,
+                        rearLength: 10,
                         borderWidth: 1,
                         borderColor: '#9A0000',
-                        backgroundColor: '#CC0000',
+                        backgroundColor: 'gold',
                     },
                     tooltip: {
-                        valueSuffix: '°',
+                        valueSuffix: 'hpa',
                     },
                 },
-                {
-                    data: [0],
-                    yAxis: 0,
-                    dial: {
-                        radius: '-88%',
-                        baseWidth: 10,
-                        baseLength: '0%',
-                        rearLength: 0,
-                        borderWidth: 1,
-                        borderColor: '#1B4684',
-                        backgroundColor: '#3465A4',
-                    },
-                },
+                
             ],
         },
         // Add some life
         function (chart) {
             if (!chart.renderer.forExport) {
+                //var diffW = chart.chartWidth - chart.plotWidth;
+                //var diffH = chart.chartHeight - chart.plotHeight;
+                console.log(chart.plotLeft + ':' + chart.plotTop)
+                chart.renderer.image('images/baro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
+            .add();
                 setInterval(function () {
                     var point = chart.series[0].points[0];
                     var newVal;
                     var inc = Math.round((Math.random() - 0.5) * 60);
                     newVal = point.y + inc;
-                    if (newVal < 0 || newVal > 360) {
+                    if (newVal < 950 || newVal > 1050) {
                         newVal = point.y - inc;
                     }
                     console.log(newVal);
                     point.update(newVal);
-                    var point2 = chart.series[1].points[0];
-                    point2.update(newVal);
-                }, 1000);
+                }, 5000);
             }
         }
     );
