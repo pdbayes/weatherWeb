@@ -24,6 +24,23 @@ $(function () {
                 endAngle: 150,
                 background: null
             },
+            plotOptions: {
+                gauge: {
+                    pivot: {
+                        radius: 18,
+                        borderWidth: 1,
+                        borderColor: 'gray',
+                        backgroundColor: {
+                            linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                            stops: [
+                                [0, 'white'],
+                                [1, 'gray']
+                            ]
+                        }
+                    }
+                }
+            },
+            
             // the value axis
             yAxis: [
                 {
@@ -59,13 +76,13 @@ $(function () {
                     yAxis: 0,
                     data: [950],
                     dial: {
-                        radius: '78%',
-                        baseWidth: 10,
+                        radius: '85%',
+                        baseWidth: 5,
                         baseLength: '0%',
-                        rearLength: 10,
+                        rearLength: 30,
                         borderWidth: 1,
-                        borderColor: '#9A0000',
-                        backgroundColor: 'gold',
+                        borderColor: '#000',
+                        backgroundColor: 'darkgrey',
                     },
                     tooltip: {
                         valueSuffix: 'hpa',
@@ -74,13 +91,14 @@ $(function () {
                 
             ],
         },
+        
         // Add some life
         function (chart) {
             if (!chart.renderer.forExport) {
                 //var diffW = chart.chartWidth - chart.plotWidth;
                 //var diffH = chart.chartHeight - chart.plotHeight;
                 console.log(chart.plotLeft + ':' + chart.plotTop)
-                chart.renderer.image('images/baro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
+                chart.renderer.image('images/newBaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
             .add();
                 setInterval(function () {
                     var point = chart.series[0].points[0];
