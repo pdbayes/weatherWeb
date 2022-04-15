@@ -114,7 +114,7 @@ $(function () {
                     }
                     console.log(newVal);
                     point.update(newVal);
-                }, 5000);
+                }, 7000);
             }
         }
     );
