@@ -98,8 +98,12 @@ $(function () {
                 //var diffW = chart.chartWidth - chart.plotWidth;
                 //var diffH = chart.chartHeight - chart.plotHeight;
                 console.log(chart.plotLeft + ':' + chart.plotTop)
+                var img = new Image();   // Create new img element
+                img.onload = function(){
                 chart.renderer.image('images/newBaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
             .add();
+                }
+                img.src = 'images/newBaro.png'; // Set source path
                 setInterval(function () {
                     var point = chart.series[0].points[0];
                     var newVal;
