@@ -100,6 +100,7 @@ $(function () {
                 console.log(chart.plotLeft + ':' + chart.plotTop)
                 var img = new Image();   // Create new img element
                 img.onload = function(){
+                    console.log('loading image');
                 chart.renderer.image('images/newBaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
             .add();
                 }
