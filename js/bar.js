@@ -101,10 +101,10 @@ $(function () {
                 var img = new Image();   // Create new img element
                 img.onload = function(){
                     console.log('loading image');
-                chart.renderer.image('../newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
+                chart.renderer.image('../images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
             .add();
                 }
-                img.src = '../newbaro.png'; // Set source path
+                img.src = '../images/newbaro.png'; // Set source path
                 setInterval(function () {
                     var point = chart.series[0].points[0];
                     var newVal;
