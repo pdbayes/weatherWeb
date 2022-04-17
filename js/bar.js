@@ -97,26 +97,46 @@ $(function () {
             if (!chart.renderer.forExport) {
                 //var diffW = chart.chartWidth - chart.plotWidth;
                 //var diffH = chart.chartHeight - chart.plotHeight;
-                console.log(chart.plotLeft + ':' + chart.plotTop)
-                var img = new Image();   // Create new img element
+                
+               var img = new Image();   // Create new img element
                 img.onload = function(){
                     console.log('loading image');
-                chart.renderer.image('../images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
+                chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight)
             .add();
                 }
-                img.src = '../images/newbaro.png'; // Set source path
+                img.src = 'images/newbaro.png'; // Set source path
                 setInterval(function () {
-                    var point = chart.series[0].points[0];
-                    var newVal;
-                    var inc = Math.round((Math.random() - 0.5) * 60);
-                    newVal = point.y + inc;
-                    if (newVal < 950 || newVal > 1050) {
-                        newVal = point.y - inc;
-                    }
-                    console.log(newVal);
-                    point.update(newVal);
+                    //var point = chart.series[0].points[0];
+                    //var newVal;
+                    //var inc = Math.round((Math.random() - 0.5) * 60);
+                   // newVal = point.y + inc;
+                   // if (newVal < 950 || newVal > 1050) {
+                   //     newVal = point.y - inc;
+                   // }
+                   var url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure/current';
+                   fetch(url, {
+                       credentials: "include",
+                       credentials: 'same-origin'
+                   })
+
+                       .then(function (resp) { return resp.json() })
+                       .then(function (data) {
+
+                           var speed = data.map(function (e) {
+                               return e.pressureHpa;
+                           })
+                           var speed_point = chart.series[0].points[0];
+                           var speedVal;
+                           speedVal = speed;
+                           console.log(speedVal);
+                           speed_point.update(speedVal);
+                           return chart;
+                        })
+                    //console.log(newVal);
+                    //point.update(newVal);
                 }, 7000);
             }
         }
+        
     );
 });
