@@ -22,11 +22,16 @@ function getData(path) {
         })
         .then(function (data) {
             var data_a = data.map(function (e) {
+                console.log(path);
                 if (path === 'rain') {
                     return [Date.parse(e.time), e.sum];
                 }
                 else if (path === 'wind') {
                     return [Date.parse(e.time), e.mean, e.max];
+                }
+                else if (path === 'temp/minmax') {
+                    return [Date.parse(e.time), e.min, e.max];
+                    
                 }
                 else {
                     return [Date.parse(e.time), e.mean];
@@ -39,6 +44,7 @@ function getData(path) {
             var legend = false;
             var chartType = 'spline';
             var chartType_b = 'column';
+            var div_name = path;
             if (path === 'temp') {
                 var meas_name = 'Temperature';
                 var unit = '°C';
@@ -124,10 +130,46 @@ function getData(path) {
                     [1, 'rgb(50, 136, 189)']
                 ];
             }
+            else if (path === 'temp/minmax') {
+                div_name = 'minmax'
+                var data_b = [];
+                for(let i = 0; i < data_a.length; i++) {
+  
+                    
+                      data_b.push([data_a[i][0], data_a[i][2]]);
+                       
+                    }
+                legend = {
+                    align: 'bottom',
+                    verticalAlign: 'top',
+                    layout: 'horizontal',
+                    itemStyle: {
+                        color: '#fff',
+                        fontWeight: 'bold'
+                    }
+                };
+                var meas_name = 'range';
+                console.log(meas_name);
+                unit = 'C';
+                console.log('unit is ' + unit)
+                var minScale = null;
+                var maxScale = null;
+                var stopCols = [
+                    [0, 'rgb(213, 62, 79)'],
+                    [0.1, 'rgb(244, 109, 67)'],
+                    [0.15, 'rgb(253,174,97)'],
+                    [0.2, 'rgb(254,224,139)'],
+                    [0.25, 'rgb(255, 255, 191)'],
+                    [0.3, 'rgb(230, 245, 152)'],
+                    [0.4, 'rgb(171, 221, 164)'],
+                    [0.45, 'rgb(102, 194, 165)'],
+                    [1, 'rgb(50, 136, 189)']
+                ];
+            }
             else {
                 var meas_name = 'error';
             }
-            div_name = path;
+            
             var chart_id = path + 'ChartId';
             var series_opt = {
                 type: chartType,
@@ -168,8 +210,34 @@ function getData(path) {
                     }
                 };
             };
+            if(path === 'temp/minmax'){
+                div_name = 'minmax';
+                series_opt = {
+                type: chartType,
+                name: 'Ave',
+                //name: meas_name,
+                data: data_a,
+                color: {
+                    //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                    linearGradient: [0, 0, 0, 0],
+                    stops: stopCols
+                }
+            };
+                series_opt_b = {
+                type: chartType,
+                name: 'Gust',
+                //name: meas_name,
+                data: data_b,
+                color: {
+                    //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                    linearGradient: [0, 0, 0, 0],
+                    stops: stopCols
+                }
+            };
+        };
 
             let chart = Highcharts.chart(div_name, {
+                
                 chart: {
                     events: {
                         load: function () {
