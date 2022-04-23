@@ -1,9 +1,9 @@
 function windowWidth() {
-    if (window.innerWidth < 500) {
+    if (window.innerWidth < 400) {
         var vpw = window.innerWidth;
     }
     else {
-        var vpw = 500;
+        var vpw = 400;
     }
     console.log('resizing ' + vpw);
 
@@ -30,6 +30,10 @@ $(function () {
                 spacingRight: 15,
                 spacingBottom: 15,
                 spacingLeft: 15,
+            },
+
+            exporting: {
+                enabled: false,
             },
 
             title: null,
@@ -181,9 +185,11 @@ $(function () {
 
         function (chart) {
             if (!chart.renderer.forExport) {
+                var img;
 
                         function refresh(){
-                            
+                                console.log(typeof img);
+                                
                             Promise.all([
                                 fetch('https://weathernode.tregrillfarmcottages.co.uk/pressure/current', {
                                     credentials: "include",
@@ -207,10 +213,9 @@ $(function () {
                             })
                                 .then(function (data) {
                                     if(typeof img != "undefined"){
-                                        img.destroy()}
-                                    var img = chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight).add();
-        
-                                    //var img = chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight).add();
+                                        console.log('destroying.')
+                                        img.destroy();
+                                    }
                                     var speed = data[0].map(function (e) {
                                         return e.pressureHpa;
                                     })
@@ -238,8 +243,8 @@ $(function () {
                                     console.log(humVal);
                                     hum_point.update(humVal);
                                     chart.setSize(windowWidth(), windowWidth(), doAnimation= true);
-                                    img.destroy();
-                                    var img = chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight).add();
+                                    
+                                    img = chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight).add();
         
                                     return chart;
                                 })
