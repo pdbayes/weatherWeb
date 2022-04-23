@@ -1,5 +1,14 @@
 .container {
-    max-width: 600px;
+    max-width: 100%;
     display:grid;
     justify-content: center;
+}
+.outer {
+    display: grid;
+    max-width: 400px;
+    grid-template-columns: 1fr;
+}
+
+.windspeedtext {
+    color:white;
 }

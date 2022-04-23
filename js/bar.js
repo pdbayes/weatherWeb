@@ -16,7 +16,7 @@ $(function () {
 
     var vpWidth = windowWidth();
 
-    
+
     $('#container').highcharts(
         {
             chart: {
@@ -186,71 +186,79 @@ $(function () {
         function (chart) {
             if (!chart.renderer.forExport) {
                 var img;
+                //$( window ).resize(refresh);
+                function refresh() {
+                    console.log(typeof img);
 
-                        function refresh(){
-                                console.log(typeof img);
-                                
-                            Promise.all([
-                                fetch('https://weathernode.tregrillfarmcottages.co.uk/pressure/current', {
-                                    credentials: "include",
-                                    credentials: 'same-origin'
-                                }),
-        
-                                fetch('https://weathernode.tregrillfarmcottages.co.uk/temp/current', {
-                                    credentials: "include",
-                                    credentials: 'same-origin'
-                                }),
-        
-                                fetch('https://weathernode.tregrillfarmcottages.co.uk/humidity/current', {
-                                    credentials: "include",
-                                    credentials: 'same-origin'
-                                })
-                            ]).then(function (responses) {
-                                // Get a JSON object from each of the responses
-                                return Promise.all(responses.map(function (response) {
-                                    return response.json();
-                                }));
+                    Promise.all([
+                        fetch('https://weathernode.tregrillfarmcottages.co.uk/pressure/current', {
+                            credentials: "include",
+                            credentials: 'same-origin'
+                        }),
+
+                        fetch('https://weathernode.tregrillfarmcottages.co.uk/temp/current', {
+                            credentials: "include",
+                            credentials: 'same-origin'
+                        }),
+
+                        fetch('https://weathernode.tregrillfarmcottages.co.uk/humidity/current', {
+                            credentials: "include",
+                            credentials: 'same-origin'
+                        })
+                    ]).then(function (responses) {
+                        // Get a JSON object from each of the responses
+                        return Promise.all(responses.map(function (response) {
+                            return response.json();
+                        }));
+                    })
+                        .then(function (data) {
+                            if (typeof img == "undefined") {
+                                console.log('destroying.')
+                                img = chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight).add();
+                            }
+                            
+                            $(window).resize(function () {
+                                chart.setSize(windowWidth(), windowWidth(), doAnimation = true);
+                                console.log('window resize called');
+                                img.destroy();
+                                img = chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight).add();
+                            });
+
+                            var speed = data[0].map(function (e) {
+                                return e.pressureHpa;
                             })
-                                .then(function (data) {
-                                    if(typeof img != "undefined"){
-                                        console.log('destroying.')
-                                        img.destroy();
-                                    }
-                                    var speed = data[0].map(function (e) {
-                                        return e.pressureHpa;
-                                    })
-                                    var speed_point = chart.series[0].points[0];
-                                    var speedVal;
-                                    speedVal = speed;
-                                    console.log(speedVal);
-                                    speed_point.update(speedVal);
-        
-                                    var temp = data[1].map(function (e) {
-                                        return e.temperatureInC;
-                                    })
-                                    var temp_point = chart.series[2].points[0];
-                                    var tempVal;
-                                    tempVal = temp;
-                                    console.log(tempVal);
-                                    temp_point.update(tempVal);
-        
-                                    var hum = data[2].map(function (e) {
-                                        return e.humidityPercentage;
-                                    })
-                                    var hum_point = chart.series[1].points[0];
-                                    var humVal;
-                                    humVal = hum;
-                                    console.log(humVal);
-                                    hum_point.update(humVal);
-                                    chart.setSize(windowWidth(), windowWidth(), doAnimation= true);
-                                    
-                                    img = chart.renderer.image('images/newbaro.png', chart.plotLeft, chart.plotTop, chart.plotWidth, chart.plotHeight).add();
-        
-                                    return chart;
-                                })
-                        }
-                        refresh();
-                        setInterval(refresh, 7000);
+                            var speed_point = chart.series[0].points[0];
+                            var speedVal;
+                            speedVal = speed;
+                            console.log(speedVal);
+                            speed_point.update(speedVal);
+
+                            var temp = data[1].map(function (e) {
+                                return e.temperatureInC;
+                            })
+                            var temp_point = chart.series[2].points[0];
+                            var tempVal;
+                            tempVal = temp;
+                            console.log(tempVal);
+                            temp_point.update(tempVal);
+
+                            var hum = data[2].map(function (e) {
+                                return e.humidityPercentage;
+                            })
+                            var hum_point = chart.series[1].points[0];
+                            var humVal;
+                            humVal = hum;
+                            console.log(humVal);
+                            hum_point.update(humVal);
+
+
+                           
+
+                            return chart;
+                        })
+                }
+                refresh();
+                setInterval(refresh, 7000);
             }
         }
 
