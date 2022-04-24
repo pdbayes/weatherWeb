@@ -1,14 +1,50 @@
+@font-face {
+    font-family: 'Digital7';
+    src: url('fonts/Digital7-1e1Z.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+
+    font-size: 2em;
+}
+
+.outer {
+    display: grid;
+    max-width: 100vw;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
 .container {
     max-width: 100%;
     display:grid;
+    grid-area: 1 / 1 / span 2 / span 2;;
     justify-content: center;
 }
-.outer {
-    display: grid;
-    max-width: 400px;
-    grid-template-columns: 1fr;
+
+
+.compassSmall {
+    grid-area: 3 / 1;
+    width: 200px;
+    height:200px;
 }
 
 .windspeedtext {
+    color:rgb(244, 12, 12);
+    grid-area: 3 / 2;
+    font-family: Digital7;
+}
+
+.uvtext {
+    grid-area: 4 / 1;
     color:white;
+}
+
+.additionaltext {
+    color:white;
+    grid-area: 4 / 2;
 }

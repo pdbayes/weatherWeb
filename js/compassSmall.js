@@ -11,7 +11,7 @@ function compass() {
             },
 
             title: {
-                text: 'Wind Direction',
+                text: null,
                 style: {
                     color: '#fff',
                     fontWeight: 'bold',

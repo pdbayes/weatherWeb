@@ -204,6 +204,10 @@ $(function () {
                         fetch('https://weathernode.tregrillfarmcottages.co.uk/humidity/current', {
                             credentials: "include",
                             credentials: 'same-origin'
+                        }),
+                        fetch('https://weathernode.tregrillfarmcottages.co.uk/wind/current', {
+                            credentials: "include",
+                            credentials: 'same-origin'
                         })
                     ]).then(function (responses) {
                         // Get a JSON object from each of the responses
@@ -250,6 +254,11 @@ $(function () {
                             humVal = hum;
                             console.log(humVal);
                             hum_point.update(humVal);
+
+                            var windSpeed = data[3].map(function (e) {
+                                return e.avSpeed;
+                            })
+                            $( '#windspeed' ).html(windSpeed + ' MPH');
 
 
                            
