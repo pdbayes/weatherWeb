@@ -5,16 +5,22 @@
    <meta charset="utf-8">
    <title>Barometer</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="style.css">
+  
    <link rel="stylesheet" href="bar.css">
    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
    <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/modules/windbarb.js"></script>
    <script src="https://code.highcharts.com/modules/exporting.js"></script>
    <script src="https://code.highcharts.com/modules/export-data.js"></script>
    <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="js/bar.js"></script>
     <script src="js/compassSmall.js"></script>
+    <script src="js/meteogram.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
+
+    
 
 </head>
 
@@ -28,8 +34,15 @@
          <div id="container" class="container"></div>
          <div id="compass" class="compassSmall"></div>
          <div id="windspeed" class="windspeedtext">'Wind Speed'</div>
-         <div id="uv" class="uvtext">'UV'</div>
-         <div id="other" class="additionaltext">'stuff'</div>
+         <figure class="highcharts-figure">
+            <div id="forecast" class="forecast">
+                <div id="loading">
+                    <i class="fa fa-spinner fa-spin"></i> Loading data from external source
+                </div>
+            </div>
+         </figure>
+        
+
       </div>
 
            

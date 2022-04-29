@@ -4,10 +4,10 @@ function compass() {
         {
             chart: {
                 type: 'gauge',
-                plotBackgroundColor: 'transparent',
+                plotBackgroundColor: 'rgb(47,47,48)',
                 plotBackgroundImage: null,
                 plotBorderWidth: 0,
-                plotShadow: true,
+                plotShadow: false,
             },
 
             title: {
@@ -27,8 +27,8 @@ function compass() {
                 endAngle: 360,
                 background: [
                     {
-                        borderWidth: 1,
-                        outerRadius: '50%',
+                        borderWidth: 0,
+                        outerRadius: '120%',
                     },
                     {
                         backgroundColor: {
@@ -39,12 +39,12 @@ function compass() {
                                 y2: 1,
                             },
                             stops: [
-                                [0, '#FFF'],
+                                [0, '#aaa'],
                                 [1, '#333'],
                             ],
                         },
-                        borderWidth: 4,
-                        outerRadius: '110%',
+                        borderWidth: 1,
+                        outerRadius: '115%',
                     },
                     {
                         backgroundColor: {
@@ -59,17 +59,17 @@ function compass() {
                                 [1, '#FFF'],
                             ],
                         },
-                        borderWidth: 4,
+                        borderWidth: 2,
                         outerRadius: '10%',
                     },
                     {
                         // default background
                     },
                     {
-                        backgroundColor: '#DDD',
+                        backgroundColor: '#fff',
                         borderWidth: 4,
-                        outerRadius: '105%',
-                        innerRadius: '100%',
+                        outerRadius: '10%',
+                        innerRadius: '110%',
                     },
                 ],
             },
@@ -82,15 +82,15 @@ function compass() {
                     min: 0,
                     max: 360,
                     lineColor: '#333',
-                    offset: -10,
-                    tickInterval: 20,
+                    offset: -5,
+                    tickInterval: 45,
                     tickWidth: 2,
                     tickPosition: 'outside',
-                    tickLength: 10,
-                    tickColor: '#333',
+                    tickLength: 5,
+                    tickColor: '#eee',
                     minorTickInterval: 5,
                     minorTickWidth: 1,
-                    minorTickLength: 10,
+                    minorTickLength: 5,
                     minorTickPosition: 'outside',
                     minorTickColor: '#666',
                     labels: {
@@ -118,20 +118,20 @@ function compass() {
                     min: 0,
                     max: 8,
                     lineColor: '#ddd',
-                    offset: -50,
+                    offset: -40,
                     tickInterval: 1,
                     tickWidth: 1,
-                    tickPosition: 'outside',
-                    tickLength: 40, // =50-10
+                    tickPosition: 'inside',
+                    tickLength: 10, // =50-10
                     tickColor: '#ddd',
                     minorTickInterval: 1,
                     minorTickWidth: 0,
-                    minorTickLength: 50,
+                    minorTickLength: 10,
                     minorTickPosition: 'inside',
                     minorTickColor: '#0f0',
                     labels: {
                         step: 1,
-                        distance: 2,
+                        distance: 3,
                         rotation: 'auto',
                     },
                     endOnTick: true,
@@ -145,13 +145,13 @@ function compass() {
                         enabled: false,
                     },
                     min: 0,
-                    max: 12,
+                    max: 16,
                     lineColor: '#ddd',
                     offset: -50,
-                    tickInterval: 10,
+                    tickInterval: 1,
                     tickWidth: 1,
                     tickPosition: 'inside',
-                    tickLength: 45,
+                    tickLength: 20,
                     tickColor: '#ddd',
                     minorTickWidth: 0,
                     endOnTick: false,
@@ -164,8 +164,8 @@ function compass() {
                     yAxis: 0,
                     data: [0],
                     dial: {
-                        radius: '88%',
-                        baseWidth: 10,
+                        radius: '100%',
+                        baseWidth: 5,
                         baseLength: '0%',
                         rearLength: 0,
                         borderWidth: 1,
@@ -181,7 +181,7 @@ function compass() {
                     yAxis: 0,
                     dial: {
                         radius: '-88%',
-                        baseWidth: 10,
+                        baseWidth: 5,
                         baseLength: '0%',
                         rearLength: 0,
                         borderWidth: 1,
