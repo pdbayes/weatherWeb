@@ -14,6 +14,7 @@
    <script src="https://code.highcharts.com/modules/export-data.js"></script>
    <script src="https://code.highcharts.com/highcharts-more.js"></script>
    <script src="js/windrose.js"></script>
+   <script src="js/temp_range.js"></script>
 
 
 </head>
@@ -41,7 +42,7 @@
             <div id="rain"></div>
             <div id="windrose"></div>
             <div id="wind"></div>
-            <div id="minmax"></div>
+            <div id="range"></div>
 
          </section>
       </div>
@@ -54,7 +55,7 @@
          getData('pressure');
          getData('rain');
          getData('wind');
-         getData('temp/minmax')
+         temp_range();
          windrose();
 
 

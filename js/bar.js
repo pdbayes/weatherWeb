@@ -92,7 +92,10 @@ $(function () {
                 {
                     labels: {
                         enabled: true,
-                        distance: 15
+                        distance: 15,
+                                style: {
+                        color: 'black'
+                                }
                     },
                     title: {
                         text: '',
@@ -115,7 +118,10 @@ $(function () {
                 }, {
                     labels: {
                         enabled: true,
-                        distance: 15
+                        distance: 15,
+                                style: {
+                        color: 'black'
+                                }
                     },
                     title: {
                         text: '',

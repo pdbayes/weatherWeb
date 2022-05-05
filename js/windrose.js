@@ -7,6 +7,7 @@ function windrose() {
 
         .then(function (resp) { return resp.json() })
         .then(function (jData) {
+            console.log(jData);
             function dir_arr(min, max, gust = 'mean') {
                 if (gust == 'mean') {
                     var max_dat = (jData.filter(function (item) {
