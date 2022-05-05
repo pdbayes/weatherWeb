@@ -663,7 +663,7 @@
 }
 
 const url = location.hash.substr(1);
-  
+function fData(){
   Highcharts.ajax({
     url,
     dataType: "json",
@@ -679,4 +679,8 @@ const url = location.hash.substr(1);
     credentials: 'include',
                                 credentials: 'same-origin',
   });
-  
+}
+fData();
+setInterval(function () {
+  fData()
+},3600000);
