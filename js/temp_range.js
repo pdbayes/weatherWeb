@@ -8,16 +8,45 @@ function temp_range() {
         .then(function (resp) { 
           return resp.json() })
         .then(function (rData) {
-                var data_a = rData;
-                console.log(rData);    
+                
+                var data_a = rData.map(function (e) {
+                  
+                  
+                      return [Date.parse(e.time), e.max, e.min];
+                  
+              });
 
-            var rangeChart = Highcharts.chart('range', {
+            let chart = Highcharts.chart('range2', {
 
                 chart: {
                     type: "columnrange",
-                    color: {
-                        //linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                        linearGradient: [0, 0, 0, 0],
+                    polar: true,
+                    
+    
+                    
+                },
+
+                title: {
+                  text: 'Temperature Range',
+                  style: {
+                      color: '#fff',
+                      fontWeight: 'bold',
+
+                  }
+              },  
+                credits: {
+                    enabled: false
+                  },
+                  exporting: {
+                    enabled: false
+                  },
+                  plotOptions: {
+                    series: {
+                      showInLegend: false,
+                      turboThreshold: 0,
+                      stacking: "normal",
+                      color: {
+                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
                         stops: [
                             [0, 'rgb(213, 62, 79)'],
                             [0.1, 'rgb(244, 109, 67)'],
@@ -30,60 +59,32 @@ function temp_range() {
                             [1, 'rgb(50, 136, 189)']
                         ]
                     },
-    
-                    title: {
-                        text: 'Temperature Range',
-                        style: {
-                            color: '#fff',
-                            fontWeight: 'bold',
-    
-                        }
-                    },
-                    subtitle: {
-                        text: 'Temp Range Over The Year',
-                        style: {
-                            color: '#fff'
-    
-                        }
-                    } ,
-                },
-
-                xAxis: {
-                    type: "datetime",
-                    tickInterval: 2592000000,
-                    labels: {
-                      format: "{value: %b}"
                     }
-                  },
-
-                  credits: {
-                    enabled: false
-                  },
-                  exporting: {
-                    enabled: false
-                  },
-                  plotOptions: {
-                    series: {
-                      turboThreshold: 0,
-                      showInLegend: false
-                    }
-                  },
-                  chart: {
-                    type: "columnrange"
                   },
                   tooltip: {
                     useHTML: true,
                     headerFormat: "<small>{point.x:%d %B, %Y}</small>",
                     pointFormat: "<table>\n  <tr>\n    <th>low</th>\n    <td>{point.low}</td>\n  </tr>\n  <tr>\n    <th>high</th>\n    <td>{point.high}</td>\n  </tr>\n</table>"
                   },
+                  
                   xAxis: {
-                    type: "datetime",
-                    tickInterval: 2592000000,
-                    labels: {
-                      format: "{value: %b}"
-                    }
+                    gridLineWidth: 0.5,
+      type: "datetime",
+      tickInterval: 2592000000,
+      labels: {
+        format: "{value: %b}"
+      }
                   },
-                  series: data_a
+                  yAxis:{
+                    max: 35,
+                    min: -5,
+                    showFirstLabel: false,
+                    tickPositions: [0, 10, 20, 30],
+                  },
+                  series:[{
+                          data: data_a,
+                  
+                }]
             });
 
 

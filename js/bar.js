@@ -264,7 +264,7 @@ $(function () {
                             var windSpeed = data[3].map(function (e) {
                                 return e.avSpeed;
                             })
-                            $( '#windspeed' ).html(windSpeed + ' MPH');
+                            $( '#speed' ).html(windSpeed + ' MPH');
 
 
                            
