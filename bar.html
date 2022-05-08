@@ -19,6 +19,7 @@
    <script src="js/meteogram.js"></script>
    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
    <script src="js/dark-unica.js"></script>
+   <script src="js/uv.js"></script>
 
 
 
@@ -36,8 +37,8 @@
       <div id="windspeed" class="windspeedtext">
          <div class="label">Wind Speed</div>
          <div id="speed" class="dat"></div>
-         <div class="label">UV</div>
-         <div class="dat">Coming soon</div>
+         <div class="label">Max UVI</div>
+         <div id="uvDat" class="dat">Coming soon</div>
          <div class="label">Wind Chill</div>
          <div class="dat">Coming Soon</div>
          <div class="label">Heat Index</div>
@@ -59,6 +60,7 @@
 </body>
 <script>
    compass()
+   getUVIndex()
 </script>
 
 </html>

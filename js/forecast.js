@@ -87,6 +87,7 @@ function getForecast(path) {
 
         .then(function (resp) { return resp.json() })
         .then(function (data) {
+            console.log(data.daily[0].uvi)
             var meas_name = '';
             if (path === 'temp') {
                 var meas_name = 'Temperature';
