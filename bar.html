@@ -20,6 +20,7 @@
    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
    <script src="js/dark-unica.js"></script>
    <script src="js/uv.js"></script>
+   <script src="js/otherMetrics.js"></script>
 
 
 
@@ -46,7 +47,7 @@
          <div class="label">Heat Index</div>
          <div id="expDat" class="dat">Coming Soon</div>
          <div class="label">Feels like</div>
-         <div class="dat">Coming Soon</div>
+         <div id="chill" class="dat">Coming Soon</div>
       </div>
       <figure class="highcharts-figure">
          <div id="forecast" class="forecast">
@@ -65,6 +66,7 @@
 <script>
    compass()
    getUVIndex()
+   others();
 </script>
 
 </html>
