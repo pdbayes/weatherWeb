@@ -87,5 +87,6 @@ margin-inline-start: 0;margin-inline-end: 0;margin-block-start: 0;
 
  .highcharts-scrolling, .highcharts-scrolling-parent {
 width: 100vw;
+overflow: hidden;
   
 height: 25vh;/* z-index: auto; */}
