@@ -14,7 +14,7 @@ function getUVIndex() {
             var sunriseTime = sunrise.getUTCHours() +1 + ":" + sunrise.getUTCMinutes();
             var sunsetTime = sunset.getUTCHours() +1 + ":" + sunset.getUTCMinutes();
             var sunUpDown = sunriseTime + " / " + sunsetTime;
-            var safeExp = (200 * 4)/(3 * response.result.uv_max).toFixed(0) + ' mins';
+            var safeExp = ((200 * 4)/(3 * response.result.uv_max)).toFixed(0) + ' mins';
             var uvHours =uvTime.getUTCHours() + 1;
             var uvMins = uvTime.getUTCMinutes();
             var uvMaxTime = uvHours + ':' + uvMins;
