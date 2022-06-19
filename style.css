@@ -330,6 +330,19 @@ max-height: 100vh;
       display: inline-block;
     }
   }
+
+      @media only screen and (max-width: 480px) {
+    .sitename, .show, .hide {
+      font-size: 14px;
+    }
+        .gagues {
+    --max-width: calc((100%) / 2);
+    width:100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(220px, var(--max-width)), 1fr));
+    /* grid-gap: 1rem; */
+}
+  }
   
   @media only screen and (max-width: 220px) {
     .sitename, .show, .hide {
