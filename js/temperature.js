@@ -17,6 +17,7 @@ function temperature() {
             style: {
                 color: '#fff',
                 fontWeight: 'bold',
+                fontSize: 15
     
              }    
         },

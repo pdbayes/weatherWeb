@@ -17,6 +17,7 @@ function speed() {
             style: {
                 color: '#fff',
                 fontWeight: 'bold',
+                fontSize: 15
     
              }    
         },

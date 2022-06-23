@@ -15,6 +15,7 @@ function compass() {
                 style: {
                     color: '#fff',
                     fontWeight: 'bold',
+                    fontSize: 15
                 },
             },
             exporting: {

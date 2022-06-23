@@ -17,6 +17,7 @@ function humidity() {
             style: {
                 color: '#fff',
                 fontWeight: 'bold',
+                fontSize: 15
     
              }    
         },
