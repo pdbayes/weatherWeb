@@ -230,7 +230,7 @@ function compass() {
                                 })
                                 .then(function (data) {
                                     var data_a = data.map(function (e) {
-                                        return e.quadrant * 22.5;
+                                        return e.quadrant;
                                     });
                                     var point = chart.series[0].points[0];
                                     var newVal;
