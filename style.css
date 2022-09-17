@@ -145,8 +145,9 @@
   
 
 .gagues {
-    --max-width: calc((100%) / 4);
-    width:100%;
+    /* --max-width:
+    calc((100%) / 4); */
+    /* width:100%; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(max(300px, var(--max-width)), 1fr));
     /* grid-gap: 1rem; */
@@ -330,10 +331,10 @@ width: 100vw;
     }
 
     .gagues {
-      --max-width:
-      calc((100%) / 2);
+      /* --max-width:
+      calc((100%) / 2); */
       width:100%;
-      height: 750px;
+      /* height: 750px; */
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(max(240px, var(--max-width)), 1fr));
       grid-template-rows: 1fr 1fr 1fr
