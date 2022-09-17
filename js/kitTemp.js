@@ -138,7 +138,7 @@ function kitTemp() {
     .then(function (data) {
         
         var speed = data.map(function (e) {
-            return e.temperatureInC;
+            return e.kitTemp;
         })
         var speed_point = chart.series[0].points[0];
         var speedVal;
