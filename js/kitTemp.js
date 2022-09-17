@@ -3,7 +3,7 @@
 
 function kitTemp() {
 
-    let temp_chart = Highcharts.chart('kitTemp', {
+    let kitTemp_chart = Highcharts.chart('kitTemp', {
         chart: {
             type: 'gauge',
             plotBackgroundColor: 'transparent',
