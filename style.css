@@ -363,7 +363,7 @@ width: 100vw;
       /* align-content: center; */
       /* justify-content: center; */
       /* justify-items: center; */
-  
+    }
     .highcharts-root {
       height:100%;
       max-width: 50vw;
@@ -371,7 +371,7 @@ width: 100vw;
     .highcharts-title {
       font-size: 8px;
     }
-  }
+  
   @media only screen and (max-width: 480px) {
     .sitename, .show, .hide {
       font-size: 14px;
