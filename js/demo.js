@@ -41,7 +41,11 @@ function getData(path) {
           return [Date.parse(e.time), e.sum];
         } if (path === 'wind') {
           return [Date.parse(e.time), e.mean, e.max];
-        } if (path === 'range') {
+        }
+        if (path === 'temp') {
+          return [Date.parse(e.time), e.mean, e.mean_1];
+        }
+        if (path === 'range') {
           return [Date.parse(e.time), e.max, e.min];
         }
         return [Date.parse(e.time), e.mean];
@@ -57,6 +61,10 @@ function getData(path) {
       const invert = false;
       let polar = false;
       if (path === 'temp') {
+        var data_b = [];
+        for (let i = 0; i < data_a.length; i++) {
+          data_b.push([data_a[i][0], data_a[i][2]]);
+        }
         var meas_name = 'Temperature';
         var unit = '°C';
         var minScale = -10;
@@ -196,6 +204,30 @@ function getData(path) {
         series_opt_b = {
           type: chartType,
           name: 'Gust',
+          // name: meas_name,
+          data: data_b,
+          color: {
+            // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+            linearGradient: [0, 0, 0, 0],
+            stops: stopCols,
+          },
+        };
+      }
+      if (path === 'temp') {
+        series_opt = {
+          type: chartType,
+          name: 'Station',
+          // name: meas_name,
+          data: data_a,
+          color: {
+            // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+            linearGradient: [0, 0, 0, 0],
+            stops: stopCols,
+          },
+        };
+        series_opt_b = {
+          type: chartType,
+          name: 'Porch',
           // name: meas_name,
           data: data_b,
           color: {
