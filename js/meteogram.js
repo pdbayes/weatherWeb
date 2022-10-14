@@ -1,8 +1,29 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable consistent-return */
+/* eslint-disable no-console */
 /* eslint-disable func-names */
+/* eslint-disable consistent-return */
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-function Meteogram(json, forecast) {
+/**
+ * This is a complex demo of how to set up a Highcharts chart, coupled to a
+ * dynamic source and extended by drawing image sprites, wind arrow paths
+ * and a second grid on top of the chart. The purpose of the demo is to inpire
+ * developers to go beyond the basic chart types and show how the library can
+ * be extended programmatically. This is what the demo does:
+ *
+ * - Loads weather forecast from www.yr.no in form of a JSON service.
+ * - When the data arrives async, a Meteogram instance is created. We have
+ *   created the Meteogram prototype to provide an organized structure of the
+ *   different methods and subroutines associated with the demo.
+ * - The parseYrData method parses the data from www.yr.no into several parallel
+ *   arrays. These arrays are used directly as the data option for temperature,
+ *   precipitation and air pressure.
+ * - After this, the options structure is built, and the chart generated with
+ *   the parsed data.
+ * - On chart load, weather icons and the frames for the wind arrows are
+ *   rendered using custom logic.
+ */
+
+function Meteogram(json, container) {
   // Parallel arrays for the chart data, these are populated as the JSON file
   // is loaded
   this.symbols = [];
@@ -14,18 +35,18 @@ function Meteogram(json, forecast) {
 
   // Initialize
   this.json = json;
-  this.forecast = forecast;
+  this.container = container;
 
   // Run
   this.parseYrData();
 }
 
 /**
-   * Mapping of the symbol code in yr.no's API to the icons in their public
-   * GitHub repo, as well as the text used in the tooltip.
-   *
-   * https://api.met.no/weatherapi/weathericon/2.0/documentation
-   */
+ * Mapping of the symbol code in yr.no's API to the icons in their public
+ * GitHub repo, as well as the text used in the tooltip.
+ *
+ * https://api.met.no/weatherapi/weathericon/2.0/documentation
+ */
 Meteogram.dictionary = {
   clearsky: {
     symbol: '01',
@@ -194,33 +215,32 @@ Meteogram.dictionary = {
 };
 
 /**
-   * Draw the weather symbols on top of the temperature series. The symbols are
-   * fetched from yr.no's MIT licensed weather symbol collection.
-   * https://github.com/YR/weather-symbols
-   */
+ * Draw the weather symbols on top of the temperature series. The symbols are
+ * fetched from yr.no's MIT licensed weather symbol collection.
+ * https://github.com/YR/weather-symbols
+ */
 Meteogram.prototype.drawWeatherSymbols = function (chart) {
   chart.series[0].data.forEach((point, i) => {
     if (this.resolution > 36e5 || i % 2 === 0) {
       const [symbol, specifier] = this.symbols[i].split('_');
       const icon = Meteogram.dictionary[symbol].symbol
-            + ({ day: 'd', night: 'n' }[specifier] || '');
+          + ({ day: 'd', night: 'n' }[specifier] || '');
 
       if (Meteogram.dictionary[symbol]) {
         chart.renderer
           .image(
             'https://cdn.jsdelivr.net/gh/nrkno/yr-weather-symbols'
-                + `@8.0.1/dist/svg/${icon}.svg`,
+              + `@8.0.1/dist/svg/${icon}.svg`,
             point.plotX + chart.plotLeft - 8,
             point.plotY + chart.plotTop - 30,
             30,
             30,
           )
           .attr({
-            zIndex: 6,
+            zIndex: 5,
           })
           .add();
       } else {
-        // eslint-disable-next-line no-console
         console.log(symbol);
       }
     }
@@ -228,31 +248,29 @@ Meteogram.prototype.drawWeatherSymbols = function (chart) {
 };
 
 /**
-   * Draw blocks around wind arrows, below the plot area
-   */
+ * Draw blocks around wind arrows, below the plot area
+ */
 Meteogram.prototype.drawBlocksForWindArrows = function (chart) {
   const xAxis = chart.xAxis[0];
 
   for (
     let pos = xAxis.min, { max } = xAxis, i = 0;
-    pos <= max + 36e5;
-    pos += 36e5, i += 1
+    pos <= max + 36e5; pos += 36e5,
+    i += 1
   ) {
     // Get the X position
     const isLast = pos === max + 36e5;
     const x = Math.round(xAxis.toPixels(pos)) + (isLast ? 0.5 : -0.5);
 
     // Draw the vertical dividers and ticks
-    const isLong = this.resolution > 36e5 ? pos % this.resolution === 0 : i % 2 === 0;
+    const isLong = this.resolution > 36e5
+      ? pos % this.resolution === 0
+      : i % 2 === 0;
 
     chart.renderer
       .path([
-        'M',
-        x,
-        chart.plotTop + chart.plotHeight + (isLong ? 0 : 28),
-        'L',
-        x,
-        chart.plotTop + chart.plotHeight + 32,
+        'M', x, chart.plotTop + chart.plotHeight + (isLong ? 0 : 28),
+        'L', x, chart.plotTop + chart.plotHeight + 32,
         'Z',
       ])
       .attr({
@@ -269,18 +287,17 @@ Meteogram.prototype.drawBlocksForWindArrows = function (chart) {
 };
 
 /**
-   * Build and return the Highcharts options structure
-   */
+ * Build and return the Highcharts options structure
+ */
 Meteogram.prototype.getChartOptions = function () {
   return {
     chart: {
-      renderTo: this.forecast,
-      mamarginBottom: 70,
+      renderTo: this.container,
+      marginBottom: 70,
       marginRight: 40,
       marginTop: 50,
       plotBorderWidth: 1,
-      height: 200,
-      width: 480,
+      height: 310,
       alignTicks: false,
       scrollablePlotArea: {
         minWidth: 720,
@@ -288,171 +305,134 @@ Meteogram.prototype.getChartOptions = function () {
     },
 
     defs: {
-      patterns: [
-        {
-          id: 'precipitation-error',
-          path: {
-            d: [
-              'M',
-              3.3,
-              0,
-              'L',
-              -6.7,
-              10,
-              'M',
-              6.7,
-              0,
-              'L',
-              -3.3,
-              10,
-              'M',
-              10,
-              0,
-              'L',
-              0,
-              10,
-              'M',
-              13.3,
-              0,
-              'L',
-              3.3,
-              10,
-              'M',
-              16.7,
-              0,
-              'L',
-              6.7,
-              10,
-            ].join(' '),
-            stroke: '#68CFE8',
-            strokeWidth: 1,
-          },
+      patterns: [{
+        id: 'precipitation-error',
+        path: {
+          d: [
+            'M', 3.3, 0, 'L', -6.7, 10,
+            'M', 6.7, 0, 'L', -3.3, 10,
+            'M', 10, 0, 'L', 0, 10,
+            'M', 13.3, 0, 'L', 3.3, 10,
+            'M', 16.7, 0, 'L', 6.7, 10,
+          ].join(' '),
+          stroke: '#68CFE8',
+          strokeWidth: 1,
         },
-      ],
+      }],
     },
 
-    title: null,
-
-    exporting: {
-      enabled: false,
+    title: {
+      text: 'Meteogram for Tregrill, Cornwall',
+      align: 'left',
+      style: {
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+      },
     },
+
     credits: false,
 
     tooltip: {
       shared: true,
       useHTML: true,
       headerFormat:
-          '<small>{point.x:%A, %b %e, %H:%M} - {point.point.to:%H:%M}</small><br>'
-          + '<b>{point.point.symbolName}</b><br>',
+        '<small>{point.x:%A, %b %e, %H:%M} - {point.point.to:%H:%M}</small><br>'
+        + '<b>{point.point.symbolName}</b><br>',
+
     },
 
-    xAxis: [
-      {
-        // Bottom X axis
-        type: 'datetime',
-        tickInterval: 2 * 36e5, // two hours
-        minorTickInterval: 36e5, // one hour
-        tickLength: 0,
-        gridLineWidth: 1,
-        gridLineColor: 'rgba(128, 128, 128, 0.1)',
-        startOnTick: false,
-        endOnTick: false,
-        minPadding: 0,
-        maxPadding: 0,
-        offset: 30,
-        showLastLabel: true,
-        labels: {
-          format: '{value:%H}',
-        },
-        crosshair: true,
+    xAxis: [{ // Bottom X axis
+      type: 'datetime',
+      tickInterval: 2 * 36e5, // two hours
+      minorTickInterval: 36e5, // one hour
+      tickLength: 0,
+      gridLineWidth: 1,
+      gridLineColor: 'rgba(128, 128, 128, 0.1)',
+      startOnTick: false,
+      endOnTick: false,
+      minPadding: 0,
+      maxPadding: 0,
+      offset: 30,
+      showLastLabel: true,
+      labels: {
+        format: '{value:%H}',
       },
-      {
-        // Top X axis
-        linkedTo: 0,
-        type: 'datetime',
-        tickInterval: 24 * 3600 * 1000,
-        labels: {
-          format:
-              '{value:<span style="font-size: 12px; font-weight: bold">%a</span> %b %e}',
-          align: 'left',
-          x: 3,
-          y: -5,
-        },
-        opposite: true,
-        tickLength: 20,
-        gridLineWidth: 1,
+      crosshair: true,
+    }, { // Top X axis
+      linkedTo: 0,
+      type: 'datetime',
+      tickInterval: 24 * 3600 * 1000,
+      labels: {
+        format: '{value:<span style="font-size: 12px; font-weight: bold">%a</span> %b %e}',
+        align: 'left',
+        x: 3,
+        y: 8,
       },
-    ],
+      opposite: true,
+      tickLength: 20,
+      gridLineWidth: 1,
+    }],
 
-    yAxis: [
-      {
-        // temperature axis
-        title: {
-          text: null,
-        },
-        labels: {
-          format: '{value}°',
-          style: {
-            fontSize: '10px',
-          },
-          x: -3,
-        },
-        plotLines: [
-          {
-            // zero plane
-            value: 0,
-            color: '#BBBBBB',
-            width: 1,
-            zIndex: 3,
-          },
-        ],
-        maxPadding: 0.3,
-        minRange: 8,
-        tickInterval: 1,
-        gridLineColor: 'rgba(128, 128, 128, 0.1)',
+    yAxis: [{ // temperature axis
+      title: {
+        text: null,
       },
-      {
-        // precipitation axis
-        title: {
-          text: null,
+      labels: {
+        format: '{value}°',
+        style: {
+          fontSize: '10px',
         },
-        labels: {
-          enabled: false,
-        },
-        gridLineWidth: 0,
-        tickLength: 0,
-        minRange: 10,
-        min: 0,
+        x: -3,
       },
-      {
-        // Air pressure
-        allowDecimals: false,
-        title: {
-          // Title on top of axis
-          text: 'hPa',
-          offset: 0,
-          align: 'high',
-          rotation: 0,
-          style: {
-            fontSize: '10px',
-            color: Highcharts.getOptions().colors[2],
-          },
-          textAlign: 'left',
-          x: 3,
-        },
-        labels: {
-          style: {
-            fontSize: '8px',
-            color: Highcharts.getOptions().colors[2],
-          },
-          y: 2,
-          x: 3,
-        },
-        gridLineWidth: 0,
-        opposite: true,
-        showLastLabel: false,
+      plotLines: [{ // zero plane
+        value: 0,
+        color: '#BBBBBB',
+        width: 1,
+        zIndex: 2,
+      }],
+      maxPadding: 0.3,
+      minRange: 8,
+      tickInterval: 1,
+      gridLineColor: 'rgba(128, 128, 128, 0.1)',
+
+    }, { // precipitation axis
+      title: {
+        text: null,
       },
-    ],
+      labels: {
+        enabled: false,
+      },
+      gridLineWidth: 0,
+      tickLength: 0,
+      minRange: 10,
+      min: 0,
+
+    }, { // Air pressure
+      allowDecimals: false,
+      title: { // Title on top of axis
+        text: 'hPa',
+        offset: 0,
+        align: 'high',
+        rotation: 0,
+        style: {
+          fontSize: '10px',
+          color: Highcharts.getOptions().colors[2],
+        },
+        textAlign: 'left',
+        x: 3,
+      },
+      labels: {
+        style: {
+          fontSize: '8px',
+          color: Highcharts.getOptions().colors[2],
+        },
+        y: 2,
+        x: 3,
+      },
+      gridLineWidth: 0,
+      opposite: true,
+      showLastLabel: false,
+    }],
 
     legend: {
       enabled: false,
@@ -464,125 +444,117 @@ Meteogram.prototype.getChartOptions = function () {
       },
     },
 
-    series: [
-      {
-        name: 'Temperature',
-        data: this.temperatures,
-        type: 'spline',
-        marker: {
-          enabled: false,
-          states: {
-            hover: {
-              enabled: true,
-            },
-          },
-        },
-        tooltip: {
-          pointFormat:
-              '<span style="color:{point.color}">\u25CF</span> '
-              + '{series.name}: <b>{point.y}°C</b><br/>',
-        },
-        zIndex: 2,
-        color: '#FF3333',
-        negativeColor: '#48AFE8',
-      },
-      {
-        name: 'Precipitation',
-        data: this.precipitationsError,
-        type: 'column',
-        color: 'url(#precipitation-error)',
-        yAxis: 1,
-        groupPadding: 0,
-        pointPadding: 0,
-        tooltip: {
-          valueSuffix: ' mm',
-          pointFormat:
-              '<span style="color:{point.color}">\u25CF</span> '
-              + '{series.name}: <b>{point.minvalue} mm - {point.maxvalue} mm</b><br/>',
-        },
-        grouping: false,
-        dataLabels: {
-          enabled: this.hasPrecipitationError,
-          filter: {
-            operator: '>',
-            property: 'maxValue',
-            value: 0,
-          },
-          style: {
-            fontSize: '8px',
-            color: 'gray',
+    series: [{
+      name: 'Temperature',
+      data: this.temperatures,
+      type: 'spline',
+      marker: {
+        enabled: false,
+        states: {
+          hover: {
+            enabled: true,
           },
         },
       },
-      {
-        name: 'Precipitation',
-        data: this.precipitations,
-        type: 'column',
-        color: '#68CFE8',
-        yAxis: 1,
-        groupPadding: 0,
-        pointPadding: 0,
-        grouping: false,
-        dataLabels: {
-          enabled: !this.hasPrecipitationError,
-          filter: {
-            operator: '>',
-            property: 'y',
-            value: 0,
-          },
-          style: {
-            fontSize: '8px',
-            color: 'gray',
-          },
+      tooltip: {
+        pointFormat: '<span style="color:{point.color}">\u25CF</span> '
+          + '{series.name}: <b>{point.y}°C</b><br/>',
+      },
+      zIndex: 1,
+      color: '#FF3333',
+      negativeColor: '#48AFE8',
+    }, {
+      name: 'Precipitation',
+      data: this.precipitationsError,
+      type: 'column',
+      color: 'url(#precipitation-error)',
+      yAxis: 1,
+      groupPadding: 0,
+      pointPadding: 0,
+      tooltip: {
+        valueSuffix: ' mm',
+        pointFormat: '<span style="color:{point.color}">\u25CF</span> '
+          + '{series.name}: <b>{point.minvalue} mm - {point.maxvalue} mm</b><br/>',
+      },
+      grouping: false,
+      dataLabels: {
+        enabled: this.hasPrecipitationError,
+        filter: {
+          operator: '>',
+          property: 'maxValue',
+          value: 0,
         },
-        tooltip: {
-          valueSuffix: ' mm',
+        style: {
+          fontSize: '8px',
+          color: 'gray',
         },
       },
-      {
-        name: 'Air pressure',
-        color: Highcharts.getOptions().colors[2],
-        data: this.pressures,
-        marker: {
-          enabled: false,
+    }, {
+      name: 'Precipitation',
+      data: this.precipitations,
+      type: 'column',
+      color: '#68CFE8',
+      yAxis: 1,
+      groupPadding: 0,
+      pointPadding: 0,
+      grouping: false,
+      dataLabels: {
+        enabled: !this.hasPrecipitationError,
+        filter: {
+          operator: '>',
+          property: 'y',
+          value: 0,
         },
-        shadow: false,
-        tooltip: {
-          valueSuffix: ' hPa',
-        },
-        dashStyle: 'shortdot',
-        yAxis: 2,
-      },
-      {
-        name: 'Wind',
-        type: 'windbarb',
-        id: 'windbarbs',
-        color: Highcharts.getOptions().colors[1],
-        lineWidth: 1.5,
-        data: this.winds,
-        vectorLength: 18,
-        yOffset: -15,
-        tooltip: {
-          valueSuffix: ' m/s',
+        style: {
+          fontSize: '8px',
+          color: 'black',
         },
       },
-    ],
+      tooltip: {
+        valueSuffix: ' mm',
+      },
+    }, {
+      name: 'Air pressure',
+      color: Highcharts.getOptions().colors[2],
+      data: this.pressures,
+      marker: {
+        enabled: false,
+      },
+      shadow: false,
+      tooltip: {
+        valueSuffix: ' hPa',
+      },
+      dashStyle: 'shortdot',
+      yAxis: 2,
+    }, {
+      name: 'Wind',
+      type: 'windbarb',
+      id: 'windbarbs',
+      color: Highcharts.getOptions().colors[1],
+      lineWidth: 1.5,
+      data: this.winds,
+      vectorLength: 18,
+      yOffset: -15,
+      tooltip: {
+        valueSuffix: ' m/s',
+      },
+    }],
   };
 };
 
 /**
-   * Post-process the chart from the callback function, the second argument
-   * Highcharts.Chart.
-   */
+ * Post-process the chart from the callback function, the second argument
+ * Highcharts.Chart.
+ */
 Meteogram.prototype.onChartLoad = function (chart) {
   this.drawWeatherSymbols(chart);
   this.drawBlocksForWindArrows(chart);
 };
 
 /**
-   * Create the chart. This function is called async when the data file is loaded
-   * and parsed.
-   */
+ * Create the chart. This function is called async when the data file is loaded
+ * and parsed.
+ */
 Meteogram.prototype.createChart = function () {
   this.chart = new Highcharts.Chart(this.getChartOptions(), (chart) => {
     this.onChartLoad(chart);
@@ -594,9 +566,9 @@ Meteogram.prototype.error = function () {
 };
 
 /**
-   * Handle the data. This part of the code is not Highcharts specific, but deals
-   * with yr.no's specific data format
-   */
+ * Handle the data. This part of the code is not Highcharts specific, but deals
+ * with yr.no's specific data format
+ */
 Meteogram.prototype.parseYrData = function () {
   let pointStart;
 
@@ -623,8 +595,9 @@ Meteogram.prototype.parseYrData = function () {
       y: node.data.instant.details.air_temperature,
       // custom options used in the tooltip formatter
       to,
-      symbolName:
-          Meteogram.dictionary[symbolCode.replace(/_(day|night)$/, '')].text,
+      symbolName: Meteogram.dictionary[
+        symbolCode.replace(/_(day|night)$/, '')
+      ].text,
     });
 
     this.precipitations.push({
@@ -658,31 +631,21 @@ Meteogram.prototype.parseYrData = function () {
 // On DOM ready...
 
 // Set the hash to the yr.no URL we want to parse
-// eslint-disable-next-line no-restricted-globals
 if (!location.hash) {
   location.hash = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=50.443530&lon=-4.420760&altitude=25';
 }
 
 const url = location.hash.substr(1);
-function fData() {
-  Highcharts.ajax({
-    url,
-    dataType: 'json',
-    success: (json) => {
-      window.meteogram = new Meteogram(json, 'forecast');
-    },
-    error: Meteogram.prototype.error,
-    headers: {
-      // Override the Content-Type to avoid preflight problems with CORS
-      // in the Highcharts demos
-      'Content-Type': 'text/plain',
-    },
-    credentials: 'include',
-    // eslint-disable-next-line no-dupe-keys
-    credentials: 'same-origin',
-  });
-}
-fData();
-setInterval(() => {
-  fData();
-}, 3600000);
+Highcharts.ajax({
+  url,
+  dataType: 'json',
+  success: (json) => {
+    window.meteogram = new Meteogram(json, 'container');
+  },
+  error: Meteogram.prototype.error,
+  headers: {
+    // Override the Content-Type to avoid preflight problems with CORS
+    // in the Highcharts demos
+    'Content-Type': 'text/plain',
+  },
+});

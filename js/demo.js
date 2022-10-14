@@ -45,6 +45,9 @@ function getData(path) {
         if (path === 'temp') {
           return [Date.parse(e.time), e.mean, e.mean_1];
         }
+        if (path === 'test') {
+          return [Date.parse(e.time), e.temperatureInC];
+        }
         if (path === 'range') {
           return [Date.parse(e.time), e.max, e.min];
         }
@@ -65,20 +68,48 @@ function getData(path) {
         for (let i = 0; i < data_a.length; i++) {
           data_b.push([data_a[i][0], data_a[i][2]]);
         }
+        legend = {
+          align: 'bottom',
+          verticalAlign: 'top',
+          layout: 'horizontal',
+          itemStyle: {
+            color: '#fff',
+            fontWeight: 'light',
+          },
+        };
         var meas_name = 'Temperature';
         var unit = '°C';
         var minScale = -10;
         var maxScale = 30;
         var stopCols = [
-          [0, 'rgb(213, 62, 79)'],
-          [0.1, 'rgb(244, 109, 67)'],
-          [0.15, 'rgb(253,174,97)'],
-          [0.2, 'rgb(254,224,139)'],
-          [0.25, 'rgb(255, 255, 191)'],
-          [0.3, 'rgb(230, 245, 152)'],
-          [0.4, 'rgb(171, 221, 164)'],
-          [0.45, 'rgb(102, 194, 165)'],
-          [1, 'rgb(50, 136, 189)'],
+          [0, 'rgb(255, 0, 0)'],
+          [0.3, 'rgb(255, 80, 0'],
+          [0.5, 'rgb(255, 165, 0'],
+          [0.7, 'rgb(0, 255, 0)'],
+          [1, 'rgb(0, 0, 255)'],
+        ];
+      } else if (path === 'test') {
+        legend = {
+          align: 'bottom',
+          verticalAlign: 'top',
+          layout: 'horizontal',
+          itemStyle: {
+            color: '#fff',
+            fontWeight: 'light',
+          },
+        };
+        var meas_name = 'Temperature2';
+        var unit = '°C';
+        var minScale = -10;
+        var maxScale = 30;
+        var stopCols = [
+          [0, 'rgb(255, 0, 0)'],
+          [0.1, 'rgb(255, 80, 0'],
+          [0.5, 'rgb(255, 165, 0'],
+          [0.6, 'rgb(230, 245, 152)'],
+          [0.7, 'rgb(0, 255, 0)'],
+          [0.8, 'rgb(102, 194, 165)'],
+          [1, 'rgb(0, 0, 255)'],
         ];
       } else if (path === 'humidity') {
         var meas_name = 'Humidity';
@@ -220,8 +251,8 @@ function getData(path) {
           // name: meas_name,
           data: data_a,
           color: {
-            // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-            linearGradient: [0, 0, 0, 0],
+            linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+            // linearGradient: [0, 0, 0, 0],
             stops: stopCols,
           },
         };
