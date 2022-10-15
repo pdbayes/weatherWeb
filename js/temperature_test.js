@@ -153,7 +153,7 @@ function temperature() {
       .then((chart) => {
         if (!chart.renderer.forExport) {
           setInterval(() => {
-            const url = 'https://weathernode.tregrillfarmcottages.co.uk/test';
+            const url = 'https://weathernode.tregrillfarmcottages.co.uk/test/current';
             fetch(url, {
               credentials: 'include',
               credentials: 'same-origin',
