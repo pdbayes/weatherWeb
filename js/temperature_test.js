@@ -134,7 +134,7 @@ function temperature() {
     }],
 
   }, (chart) => {
-    const url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/current';
+    const url = 'https://weathernode.tregrillfarmcottages.co.uk/test/current';
     fetch(url, {
       credentials: 'include',
       credentials: 'same-origin',
