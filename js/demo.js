@@ -244,7 +244,7 @@ function getData(path) {
           },
         };
       }
-      if (path === 'temp') {
+      if (path === '7d') {
         series_opt = {
           type: chartType,
           name: 'Station',
