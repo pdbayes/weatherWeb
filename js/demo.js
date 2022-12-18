@@ -24,7 +24,7 @@ function getData(path) {
     .then((resp) => resp.json())
     .then((data) => {
       var meas_name = '';
-      if (path === 'temp') {
+      if (path === 'temp/sevend') {
         var meas_name = 'Temperature';
       } else if (path === 'humidity') {
         var meas_name = 'Humidity';
