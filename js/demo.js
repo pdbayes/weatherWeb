@@ -42,7 +42,7 @@ function getData(path) {
         } if (path === 'wind') {
           return [Date.parse(e.time), e.mean, e.max];
         }
-        if (path === 'temp') {
+        if (path === 'temp/sevend') {
           return [Date.parse(e.time), e.mean, e.mean_1];
         }
         if (path === 'test') {
