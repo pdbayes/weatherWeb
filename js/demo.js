@@ -45,9 +45,6 @@ function getData(path) {
         if (path === 'temp/7d') {
           return [Date.parse(e.time), e.mean, e.mean_1];
         }
-        if (path === 'test') {
-          return [Date.parse(e.time), e.temperatureInC];
-        }
         if (path === 'range') {
           return [Date.parse(e.time), e.max, e.min];
         }
@@ -86,29 +83,6 @@ function getData(path) {
           [0.3, 'rgb(255, 80, 0'],
           [0.5, 'rgb(255, 165, 0'],
           [0.7, 'rgb(0, 255, 0)'],
-          [1, 'rgb(0, 0, 255)'],
-        ];
-      } else if (path === 'test') {
-        legend = {
-          align: 'bottom',
-          verticalAlign: 'top',
-          layout: 'horizontal',
-          itemStyle: {
-            color: '#fff',
-            fontWeight: 'light',
-          },
-        };
-        var meas_name = 'Temperature2';
-        var unit = '°C';
-        var minScale = -10;
-        var maxScale = 30;
-        var stopCols = [
-          [0, 'rgb(255, 0, 0)'],
-          [0.1, 'rgb(255, 80, 0'],
-          [0.5, 'rgb(255, 165, 0'],
-          [0.6, 'rgb(230, 245, 152)'],
-          [0.7, 'rgb(0, 255, 0)'],
-          [0.8, 'rgb(102, 194, 165)'],
           [1, 'rgb(0, 0, 255)'],
         ];
       } else if (path === 'humidity') {
