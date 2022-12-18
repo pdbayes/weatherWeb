@@ -63,7 +63,7 @@ function getData(path) {
       const div_name = path;
       const invert = false;
       let polar = false;
-      if (path === 'temp') {
+      if (path === 'temp/7d') {
         var data_b = [];
         for (let i = 0; i < data_a.length; i++) {
           data_b.push([data_a[i][0], data_a[i][2]]);
