@@ -24,7 +24,7 @@ function getData(path) {
     .then((resp) => resp.json())
     .then((data) => {
       var meas_name = '';
-      if (path === 'temp/sevend') {
+      if (path === 'temp/7d') {
         var meas_name = 'Temperature';
       } else if (path === 'humidity') {
         var meas_name = 'Humidity';
@@ -42,7 +42,7 @@ function getData(path) {
         } if (path === 'wind') {
           return [Date.parse(e.time), e.mean, e.max];
         }
-        if (path === 'temp/sevend') {
+        if (path === 'temp/7d') {
           return [Date.parse(e.time), e.mean, e.mean_1];
         }
         if (path === 'test') {
