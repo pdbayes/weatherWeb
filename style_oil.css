@@ -1,0 +1,337 @@
+@font-face {
+	font-family: 'DSEG14-Modern';
+	src: url('fonts/DSEG14-Modern/DSEG14Modern-Bold.woff2') format('woff2'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Bold.woff') format('woff'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'DSEG14-Modern';
+	src: url('fonts/DSEG14-Modern/DSEG14Modern-BoldItalic.woff2') format('woff2'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-BoldItalic.woff') format('woff'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'DSEG14-Modern';
+	src: url('fonts/DSEG14-Modern/DSEG14Modern-Italic.woff2') format('woff2'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Italic.woff') format('woff'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Italic') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'DSEG14-Modern';
+	src: url('fonts/DSEG14-Modern/DSEG14Modern-Light.woff2') format('woff2'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Light.woff') format('woff'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Light.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'DSEG14-Modern';
+	src: url('fonts/DSEG14-Modern/DSEG14Modern-LightItalic.woff2') format('woff2'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-LightItalic.woff') format('woff'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-LightItalic.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'DSEG14-Modern';
+	src: url('fonts/DSEG14-Modern/DSEG14Modern-Regular.woff2') format('woff2'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Regular.woff') format('woff'),
+		url('fonts/DSEG14-Modern/DSEG14Modern-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* DSEG7 Modern */
+
+@font-face {
+	font-family: 'DSEG7-Modern';
+	src: url('fonts/DSEG7-Modern/DSEG7Modern-Bold.woff2') format('woff2'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Bold.woff') format('woff'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+  }
+  
+  @font-face {
+	font-family: 'DSEG7-Modern';
+	src: url('fonts/DSEG7-Modern/DSEG7Modern-BoldItalic.woff2') format('woff2'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-BoldItalic.woff') format('woff'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+  }
+  
+  @font-face {
+	font-family: 'DSEG7-Modern';
+	src: url('fonts/DSEG7-Modern/DSEG7Modern-Italic.woff2') format('woff2'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Italic.woff') format('woff'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+  }
+  
+  @font-face {
+	font-family: 'DSEG7-Modern';
+	src: url('fonts/DSEG7-Modern/DSEG7Modern-Light.woff2') format('woff2'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Light.woff') format('woff'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Light.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+  }
+  
+  @font-face {
+	font-family: 'DSEG7-Modern';
+	src: url('fonts/DSEG7-Modern/DSEG7Modern-LightItalic.woff2') format('woff2'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-LightItalic.woff') format('woff'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-LightItalic.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+  }
+  
+  @font-face {
+	font-family: 'DSEG7-Modern';
+	src: url('fonts/DSEG7-Modern/DSEG7Modern-Regular.woff2') format('woff2'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Regular.woff') format('woff'),
+	url('fonts/DSEG7-Modern/DSEG7Modern-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+  }
+
+.display {
+	margin-top: 10px;
+	text-align: center;
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+	grid-template-areas:
+    "dt dt"
+    "cl cl"
+    "tm hm"
+	"pr cn"
+	"sp di";
+    background-color: #e3b043;
+    color: #030303;
+    border:6px solid #000;
+	border-radius:9px;
+    max-width: 600px;
+    justify-items: center;
+    grid-gap: 5px;
+	background-color:#fb7c00;
+	padding-top: 5px;
+	box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.1) inset; 
+    /* padding: 5px; */
+}
+.pos {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.temp-back {
+	font-family: "DSEG14-Modern";
+	z-index: 50;
+	grid-area: tm;
+	color: rgba(0, 0, 0, 0.1);
+	font-size: 50px;
+	width:100%;
+}
+
+.temp-front {
+	font-family: "DSEG14-Modern";
+	z-index: 100;
+	grid-area: tm;
+	font-size: 50px;
+	width:100%;
+}
+.hum-back {
+	font-family: "DSEG14-Modern";
+	z-index: 50;
+    grid-area: hm;
+	color: rgba(0, 0, 0, 0.1);
+	font-size: 50px;
+	width:100%;
+}
+
+.hum-front {
+	font-family: "DSEG14-Modern";
+	z-index: 100;
+	grid-area: hm;
+	font-size: 50px;
+	width:100%;
+}
+
+.press-back {
+	font-family: "DSEG14-Modern";
+	z-index: 50;
+	grid-area: pr;
+	color: rgba(0, 0, 0, 0.1);
+	font-size: 50px;
+	width:100%;
+}
+
+.press-front {
+	font-family: "DSEG14-Modern";
+	z-index: 100;
+	grid-area: pr;
+	font-size: 50px;
+	width:100%;
+}
+
+.direction-back {
+	font-family: "DSEG14-Modern";
+	z-index: 50;
+	grid-area: di;
+	color: rgba(0, 0, 0, 0.1);
+	font-size: 50px;
+	width:100%;
+}
+
+.direction-front {
+	font-family: "DSEG14-Modern";
+	z-index: 100;
+	grid-area: di;
+	font-size: 50px;
+	width:100%;
+}
+
+
+.speed-back {
+	font-family: "DSEG14-Modern";
+	z-index: 50;
+	grid-area: sp;
+	color: rgba(0, 0, 0, 0.1);
+	font-size: 50px;
+	width:100%;
+}
+
+.speed-front {
+	font-family: "DSEG14-Modern";
+	z-index: 100;
+	grid-area: sp;
+	font-size: 50px;
+	width:100%;
+}
+
+@font-face {
+	font-family: "D7MI";
+	src: url("fonts/DSEG7-Modern/DSEG7Modern-Italic.woff2") format('woff');
+  }
+  
+  @font-face {
+	font-family: "D14MI";
+	src: url("fonts/DSEG7-Modern/DSEG7Modern-Italic.woff2") format('woff');
+  }
+  
+  @font-face {
+	font-family: "D7MBI";
+	src: url("fonts/DSEG7-Modern/DSEG7Modern-BoldItalic.woff2") format('woff');
+  }
+  
+  @font-face {
+	font-family: "DWEATHER";
+	src: url("fonts/DSEGWeather/DSEGWeather.woff2") format('woff');
+  }
+  
+  .D7MI {
+  font-family: "D7MI";
+  }
+  
+  .D7MBI {
+  font-family: "D7MBI";
+  }
+  
+  .D14MI {
+  font-family: "D14MI";
+  }
+  
+  .DWEATHER {
+  font-family: "DWEATHER";
+  font-size:72px;
+  height:72px;
+  }
+  
+  .clock {
+	display:grid;
+	width: 488px;
+	height: 75px;
+	padding-top: 5px;
+	grid-column: col 1 /span 2;
+	grid-row: row 2;
+
+  }
+
+  .date {
+
+	display:grid;
+	width: 488px;
+	height: 30px;
+	padding-top: 5px;
+	grid-column: col 1 /span 2;
+	grid-row: row 1;
+
+  }
+  
+  .Clock-Time-Background{
+	  z-index:50;
+	  color:rgba(0,0,0,0.15);
+	  font-size:70px;
+	  grid-area: cl;
+	  width:100%;
+  }
+  
+  .Clock-Time-Front{
+	  z-index:100;
+	  font-size:70px;
+	  grid-area: cl;
+	  width:100%;
+  }
+  
+  .Clock-Year-Background{
+	  z-index:50;
+	  top:13px;
+	  color:rgba(0,0,0,0.1);
+	  font-size:27px;
+	  grid-area: dt;
+	  width:100%;
+      
+  }
+  
+  .Clock-Year-Front{
+	  z-index:100;
+	  top:13px;
+	  font-size:27px;
+	  grid-area: dt;
+	  width:100%;
+  
+  }
+
+  .condition {
+	font-family: "DWEATHER";
+	font-size:72px;
+	height:72px;
+	grid-area: cn;
+	width:100%;
+
+
+  }
+
+  .unit {
+
+	font-family: "DWEATHER";
+	font-size:30px;
+  }
+
+	

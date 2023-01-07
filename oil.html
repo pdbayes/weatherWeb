@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <title>Our Weather</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript" src="charts.js"></script>
+      <link rel="stylesheet" href="style_oil.css">
+      <script>
+  
+          var daylist = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  
+          function genTimerStrings(tm, num) {
+  
+              var i;
+              var ret = tm.toString(10);
+              var left = ret.length;
+  
+              if (left < num) {
+                  for (i = 0; i < (num - left); i++) {
+                      ret = String(0) + ret;
+                  }
+              }
+  
+              return ret;
+          }
+  
+          function updateTimer() {
+              var ret;
+              var date = new Date();
+              var tm_year, tm_mon, tm_date, tm_hour, tm_min, tm_sec, tm_msec, tm_day;
+              var colon;
+  
+              tm_year = date.getFullYear();
+              tm_mon = date.getMonth() + 1;
+              tm_date = date.getDate();
+              tm_day = date.getDay();
+              tm_hour = date.getHours();
+              tm_min = date.getMinutes();
+              tm_sec = date.getSeconds();
+              tm_msec = date.getMilliseconds();
+  
+              tm_mon = genTimerStrings(tm_mon, 2);
+              tm_date = genTimerStrings(tm_date, 2);
+              tm_hour = genTimerStrings(tm_hour, 2);
+              tm_min = genTimerStrings(tm_min, 2);
+              tm_sec = genTimerStrings(tm_sec, 2);
+              tm_day = daylist[tm_day];
+  
+              if (tm_msec > 499) {
+                  colon = ' ';
+              } else {
+                  colon = ':';
+              }
+  
+              document.getElementById("DSEGClock").innerHTML = tm_hour + colon + tm_min + "<span style=\"font-size:30px;\">" + tm_sec + "</span>";
+              document.getElementById("DSEGClock-Year").innerHTML = tm_date + "-" + tm_mon + "-" + tm_year + "<span class=\"D14MI\">&nbsp" + tm_day + "." + "</span>";
+  
+              setTimeout("updateTimer()", 500 - date.getMilliseconds() % 500);
+  
+          }
+  
+      </script>
+  
+  </head>
+  
+  <body onload="updateTimer()">
+  
+  
+      <div id='display' class='display'>
+  
+  
+          <div class="Clock-Time-Background D7MBI pos">88:88<span style="font-size:30px;">88</span>
+          </div>
+          <div id="DSEGClock" class="Clock-Time-Front D7MBI pos"></div>
+  
+  
+          <div class="Clock-Year-Background pos D7MI">2088-88-88<span class="D14MI" >&nbsp888</span>
+          </div>
+          <div id="DSEGClock-Year" class="Clock-Year-Front D7MI pos"></div>
+  
+  
+          <div id='temp_background' class='temp-back pos'>88.88<span style="font-size:30px;">88</span></div>
+          <div id='temperature' class='temp-front pos'></div>
+          <div id='humidity' class="hum-front pos"></div>
+          <div id='humidity-back' class='hum-back pos'>88.88<span style="font-size:30px;">8</span></div>
+          <div id="pressure" class="press-front pos"></div>
+          <div id='pressure-back' class='press-back pos'>8888.88<span style="font-size:30px;">888</span></div>
+          <div id='condition' class='condition pos'>4</div>
+          <div id='speed' class='speed-front pos'></div>
+          <div id='speed-back' class='speed-back pos'>88.88<span style="font-size:30px;">888</span></div>
+          <div id='direction' class='direction-front pos'></div>
+          <div id='speed-back' class='direction-back pos'>888</div>
+  
+      </div>
+  
+      <script>
+          mainDisplay();
+      </script>
+  </body>
+  
+  </html>
