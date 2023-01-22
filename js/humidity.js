@@ -139,7 +139,7 @@ function humidity() {
             .then(function (data) {
                 
                 var speed = data.map(function (e) {
-                    return e.humidityPercentage;
+                    return e.humidity;
                 })
                 var speed_point = chart.series[0].points[0];
                 var speedVal;
