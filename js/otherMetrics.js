@@ -1,27 +1,26 @@
-function others(){
-function getChill(){
-    var url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/chill';
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
+/* eslint-disable no-dupe-keys */
+/* eslint-disable no-unused-vars */
+function others() {
+  function getChill() {
+    const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/chill';
     fetch(url, {
-        credentials: "include",
-        credentials: 'same-origin'
+      credentials: 'include',
+      credentials: 'same-origin',
     })
 
-.then(function (resp) { return resp.json() })
-.then(function (data) {
-var chill = data.map(function (e) {
-        return e.mean;
-    });
-  console.log('chill ' + chill);
+      .then((resp) => resp.json())
+      .then((data) => {
+        const chill = data.map((e) => e.mean);
+        console.log(`chill ${chill}`);
 
-$('#chill').html(parseFloat(chill).toFixed(2));
+        $('#chill').html(parseFloat(chill).toFixed(2));
+      });
+  }
 
-})
-};
-
-
-getChill()
-setInterval(function () {
-    //getChill()
-  },10000);
+  getChill();
+  setInterval(() => {
+    // getChill()
+  }, 10000);
 }
-  

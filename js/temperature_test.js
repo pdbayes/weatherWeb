@@ -134,7 +134,7 @@ function temperature() {
     }],
 
   }, (chart) => {
-    const url = 'https://weathernode.tregrillfarmcottages.co.uk/test/current';
+    const url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/current';
     fetch(url, {
       credentials: 'include',
       credentials: 'same-origin',
@@ -142,7 +142,7 @@ function temperature() {
 
       .then((resp) => resp.json())
       .then((data) => {
-        const speed = data.map((e) => e.temperatureInC);
+        const speed = data.map((e) => e.temperature);
         const speed_point = chart.series[0].points[0];
         let speedVal;
         speedVal = speed;
@@ -153,7 +153,7 @@ function temperature() {
       .then((chart) => {
         if (!chart.renderer.forExport) {
           setInterval(() => {
-            const url = 'https://weathernode.tregrillfarmcottages.co.uk/test/current';
+            const url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/current';
             fetch(url, {
               credentials: 'include',
               credentials: 'same-origin',
@@ -161,7 +161,7 @@ function temperature() {
 
               .then((resp) => resp.json())
               .then((data) => {
-                const speed = data.map((e) => e.temperatureInC);
+                const speed = data.map((e) => e.temperature);
                 const speed_point = chart.series[0].points[0];
                 let speedVal;
                 speedVal = speed;

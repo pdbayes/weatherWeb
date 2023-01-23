@@ -124,7 +124,7 @@ function speed() {
 
         .then((resp) => resp.json())
         .then((data) => {
-          const speed = data.map((e) => e.speed);
+          const speed = data.map((e) => e.Speed);
           const speed_point = chart.series[0].points[0];
           let speedVal;
           speedVal = speed;
@@ -143,7 +143,7 @@ function speed() {
 
                 .then((resp) => resp.json())
                 .then((data) => {
-                  const speed = data.map((e) => e.speed);
+                  const speed = data.map((e) => e.Speed);
                   const speed_point = chart.series[0].points[0];
                   let speedVal;
                   speedVal = speed;
