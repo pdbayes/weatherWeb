@@ -43,7 +43,7 @@ function getData(path) {
           return [Date.parse(e.time), e.mean, e.max];
         }
         if (path === 'temp/7d') {
-          return [Date.parse(e.time), e.mean, e.mean_1];
+          return [Date.parse(e.time), e.temperature];
         }
         if (path === 'range') {
           return [Date.parse(e.time), e.min];
