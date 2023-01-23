@@ -148,13 +148,46 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(max(300px, var(--max-width)), 1fr));
     /* grid-gap: 1rem; */
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+	grid-template-areas:
+    "tArea pArea"
+    "hArea rArea"
+    "wArea wrArea"
+	"raArea raArea";
     height: 100%;
     align-items: start;
     justify-content: space-between;
     justify-items: center;
 }
 
-  
+  .tArea {
+    grid-area: tArea;
+  }
+
+  .pArea {
+    grid-area: pArea;
+  }
+
+  .hArea {
+    grid-area: hArea;
+  }
+
+  .rArea {
+    grid-area: rArea;
+  }
+
+  .wArea {
+    grid-area: wrArea;
+  }
+
+  .wrArea {
+    grid-area: wrArea;
+  }
+
+  .raArea {
+    grid-area: raArea;
+  }
 
 .gagues {
     /* --max-width:
