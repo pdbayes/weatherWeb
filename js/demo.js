@@ -48,6 +48,12 @@ function getData(path) {
         if (path === 'range') {
           return [Date.parse(e.time), e.min];
         }
+        if (path === 'humidity') {
+          return [Date.parse(e.time), e.humidity];
+        }
+        if (path === 'pressure') {
+          return [Date.parse(e.time), e.pressure];
+        }
         return [Date.parse(e.time), e.mean];
       });
       console.log(data_a);
