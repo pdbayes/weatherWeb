@@ -1,3 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
+/* eslint-disable no-dupe-keys */
+/* eslint-disable camelcase */
+/* eslint-disable no-redeclare */
 /* eslint-disable block-scoped-var */
 /* eslint-disable no-var */
 /* eslint-disable vars-on-top */
@@ -224,7 +229,7 @@ function getForecast(path) {
       } else {
         var meas_name = 'error';
       }
-      div_name = path;
+      var div_name = path;
 
       Highcharts.chart(div_name, {
         chart: {
