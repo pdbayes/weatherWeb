@@ -225,7 +225,9 @@ function getData(path) {
           // name: meas_name,
           data: data_a,
           color: {
-            linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+            linearGradient: {
+              x1: 0, x2: 0, y1: 0, y2: 1,
+            },
             // linearGradient: [0, 0, 0, 0],
             stops: stopCols,
           },

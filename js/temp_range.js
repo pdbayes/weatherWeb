@@ -1,14 +1,20 @@
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable no-undef */
+/* eslint-disable no-dupe-keys */
+/* eslint-disable no-var */
+/* eslint-disable camelcase */
+/* eslint-disable no-unused-vars */
 function temp_range() {
   var url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/minmax';
   fetch(url, {
-    credentials: "include",
-    credentials: 'same-origin'
+    credentials: 'include',
+    credentials: 'same-origin',
   })
 
-    .then(function (resp) {
-      return resp.json()
-    })
-    .then(function (rData) {
+    .then((resp) => resp.json())
+    .then((rData) => {
       function colRange(tempMin, tempMax) {
         var tempC = (tempMin + (tempMax)) / 2;
 
@@ -20,43 +26,35 @@ function temp_range() {
           // green to yellow
           r = Math.floor(255 * (tempC / mid));
           g = 255;
-
         } else {
           // yellow to red
           r = 255;
           g = Math.floor(255 * ((mid - (tempC - 1) % mid) / mid));
         }
 
-        return 'RGB(' + r + ',' + g + ',' + b + ')';
-
+        return `RGB(${r},${g},${b})`;
       }
-      var data_a = rData.map(function (e) {
-
+      // eslint-disable-next-line vars-on-top
+      var data_a = rData.map((e) => {
         var col = colRange(e.min, e.max);
         console.log(col);
         return [Date.parse(e.time), e.max, e.min, col];
-
       });
       console.log(data_a);
 
-
-
-      let chart = Highcharts.chart('range2', {
+      const chart = Highcharts.chart('range2', {
 
         chart: {
-          type: "columnrange",
+          type: 'columnrange',
           polar: true,
           events: {
-            load: function () {
+            load() {
               var chart = this;
               var extremes = chart.plotBox.y;
               var yMin = chart.plotBox.y;
               var yMax = chart.plotBox.y + chart.plotBox.height;
-
-            }
-          }
-
-
+            },
+          },
 
         },
 
@@ -66,35 +64,35 @@ function temp_range() {
             color: '#fff',
             fontWeight: 'bold',
 
-          }
+          },
         },
         credits: {
-          enabled: false
+          enabled: false,
         },
         exporting: {
-          enabled: false
+          enabled: false,
         },
         plotOptions: {
           series: {
             showInLegend: false,
             turboThreshold: 0,
-            stacking: "normal"
+            stacking: 'normal',
 
-          }
           },
+        },
         tooltip: {
           useHTML: true,
-          headerFormat: "<small>{point.x:%d %B, %Y}</small>",
-          pointFormat: "<table>\n  <tr>\n    <th>low</th>\n    <td>{point.low}</td>\n  </tr>\n  <tr>\n    <th>high</th>\n    <td>{point.high}</td>\n  </tr>\n</table>"
+          headerFormat: '<small>{point.x:%d %B, %Y}</small>',
+          pointFormat: '<table>\n  <tr>\n    <th>low</th>\n    <td>{point.low}</td>\n  </tr>\n  <tr>\n    <th>high</th>\n    <td>{point.high}</td>\n  </tr>\n</table>',
         },
 
         xAxis: {
           gridLineWidth: 0.5,
-          type: "datetime",
+          type: 'datetime',
           tickInterval: 2592000000,
           labels: {
-            format: "{value: %b}"
-          }
+            format: '{value: %b}',
+          },
         },
         yAxis: {
           max: 40,
@@ -110,19 +108,11 @@ function temp_range() {
             radialGradient: { cx: 0, cy: 0.5, r: 1 },
             stops: [
               [0, 'blue'],
-              [1, 'red']
-            ]
-          }
+              [1, 'red'],
+            ],
+          },
 
-
-        
-
-
-        }]
-      })
-
-
-
-
-    })
+        }],
+      });
+    });
 }
