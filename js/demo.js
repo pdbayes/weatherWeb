@@ -12,7 +12,7 @@
 /* eslint-disable no-unused-vars */
 function getData(path) {
   if (path == 'range') {
-    var url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/minmax';
+    var url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/min';
   } else {
     var url = `https://weathernode.tregrillfarmcottages.co.uk/${path}`;
   }
@@ -46,7 +46,7 @@ function getData(path) {
           return [Date.parse(e.time), e.mean, e.mean_1];
         }
         if (path === 'range') {
-          return [Date.parse(e.time), e.max, e.min];
+          return [Date.parse(e.time), e.min];
         }
         return [Date.parse(e.time), e.mean];
       });
