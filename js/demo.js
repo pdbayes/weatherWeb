@@ -10,7 +10,7 @@
 /* eslint-disable block-scoped-var */
 /* eslint-disable no-var */
 /* eslint-disable no-unused-vars */
-// function getData(path) {
+function getData(path) {
 //   if (path == 'range') {
 //     var url = 'https://weathernode.tregrillfarmcottages.co.uk/temp/min';
 //   } else {
