@@ -50,7 +50,7 @@ function getData(path) {
         }
         return [Date.parse(e.time), e.mean];
       });
-
+      console.log(data_a);
       // var current = data_a[data_a.len - 1][1];
       // console.log('current' + current);
       var meas_name = '';
