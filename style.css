@@ -146,48 +146,19 @@
     calc((100vw) / 2); */
     width:100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(max(300px, var(--max-width)), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     /* grid-gap: 1rem; */
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto;
-	grid-template-areas:
-    "tArea pArea"
-    "hArea rArea"
-    "wArea wrArea"
-	"raArea raArea";
     height: 100%;
     align-items: start;
     justify-content: space-between;
     justify-items: center;
 }
 
-  .tArea {
-    grid-area: tArea;
-  }
-
-  .pArea {
-    grid-area: pArea;
-  }
-
-  .hArea {
-    grid-area: hArea;
-  }
-
-  .rArea {
-    grid-area: rArea;
-  }
-
-  .wArea {
-    grid-area: wrArea;
-  }
-
-  .wrArea {
-    grid-area: wrArea;
-  }
-
-  .raArea {
-    grid-area: raArea;
-  }
+.cgrid {
+  width:100%;
+}
 
 .gagues {
     /* --max-width:
@@ -315,13 +286,7 @@ width: 100vw;
   }
   
   @media only screen and (max-width: 800px) {
-.charts {
-    display: grid;
-    grid: 800px;
-    width: 100vw;
-    /* grid-gap: 1rem; */
-    margin-top: 46px;
-}
+
     .highcharts-container {background-color: black;max-width: 100%;max-height: 100%;}
 
     
@@ -370,33 +335,7 @@ width: 100vw;
     .highcharts-container{
       max-width: 100%;
     }
-    .gagues {
-      --max-width:calc((100%) / 2);
-      width:100%;
-      /* height: 750px; */
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(max(240px, var(--max-width)), 1fr));
-      grid-template-rows: auto;
-      /* grid-gap: 1rem;;;; */;
-      /* align-items: center; */
-      /* align-content: center; */
-      /* justify-content: center; */
-      /* justify-items: center; */
-  }
-    .charts {
-      /* --max-width:
-      calc((100vw) / 2); */
-      /* width:100%; */
-      /* height: 750px; */
-      display: grid;
-      /* grid-template-columns: repeat(auto-fit, minmax(max(100vw, var(--max-width)), 1fr)); */
-      grid-template-rows: auto;
-      /* grid-gap: 1rem;;;; */
-      /* align-items: center; */
-      /* align-content: center; */
-      /* justify-content: center; */
-      /* justify-items: center; */
-    }
+    
     .highcharts-root {
       height:100%;
       max-width: 100vw;
@@ -410,20 +349,6 @@ width: 100vw;
       font-size: 14px;
     }
 
-    .gagues {
-      /* --max-width:
-      calc((100%) / 2); */
-      width:100%;
-      /* height: 750px; */
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(max(240px, var(--max-width)), 1fr));
-      grid-template-rows: 1fr 1fr 1fr
-      /* grid-gap: 1rem;;;; */;
-      /* align-items: center; */
-      /* align-content: center; */
-      /* justify-content: center; */
-      /* justify-items: center; */
-  }
     .highcharts-root {
       max-height:100%;
       
