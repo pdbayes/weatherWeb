@@ -148,8 +148,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     /* grid-gap: 1rem; */
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto;
+
     height: 100%;
     align-items: start;
     justify-content: space-between;
