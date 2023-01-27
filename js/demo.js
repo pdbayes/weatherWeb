@@ -38,7 +38,7 @@ function getData(path) {
       const data_a = data.map((e) => {
         console.log(path);
         if (path === 'rain') {
-          return [Date.parse(e.time), e.sum];
+          return [Date.parse(e.time), e.Rain];
         } if (path === 'wind') {
           return [Date.parse(e.time), e.mean, e.max];
         }
