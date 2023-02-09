@@ -115,7 +115,7 @@ function getData(path) {
         var meas_name = 'Rain';
         var unit = 'mm';
         var minScale = 0;
-        var maxScale = 'auto';
+        var maxScale = null;
         chartType = 'column';
         chartType_b = 'spline';
         var stopCols = [
