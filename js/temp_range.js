@@ -15,6 +15,7 @@ function temp_range() {
 
     .then((resp) => resp.json())
     .then((rData) => {
+      console.lof(rData)
       function colRange(tempMin, tempMax) {
         var tempC = (tempMin + (tempMax)) / 2;
 
