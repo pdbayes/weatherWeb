@@ -208,13 +208,13 @@ function compass() {
       })
         .then((resp) => resp.json())
         .then((data) => {
-          const data_a = data.map((e) => e.quadrant);
-          const point = chart.series[0].points[0];
-          let newVal;
+          var data_a = data.map((e) => e.quadrant);
+          var point = chart.series[0].points[0];
+          var newVal;
           newVal = data_a;
           console.log(newVal);
           point.update(newVal);
-          const point2 = chart.series[1].points[0];
+          var point2 = chart.series[1].points[0];
           point2.update(newVal);
           return chart;
         })
@@ -228,13 +228,13 @@ function compass() {
               })
                 .then((resp) => resp.json())
                 .then((data) => {
-                  const data_a = data.map((e) => e.quadrant);
-                  const point = chart.series[0].points[0];
-                  let newVal;
+                  var data_a = data.map((e) => e.quadrant);
+                  var point = chart.series[0].points[0];
+                  var newVal;
                   newVal = data_a;
                   console.log(newVal);
                   point.update(newVal);
-                  const point2 = chart.series[1].points[0];
+                  var point2 = chart.series[1].points[0];
                   point2.update(newVal);
                 });
             }, 10000);
