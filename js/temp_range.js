@@ -37,7 +37,7 @@ function temp_range() {
       // eslint-disable-next-line vars-on-top
       var data_a = rData.map((e) => {
         var col = colRange(e.min, e.max);
-        console.log(col);
+        //console.log(col);
         return [Date.parse(e.time), e.max, e.min, col];
       });
       console.log(data_a);
