@@ -26,7 +26,8 @@ function temp_range() {
 
         chart: {
           type: 'arearange',
-          zoomType: 'x'
+          zoomType: 'x',
+          polar: false
       },
 
         title: {
