@@ -16,8 +16,6 @@ function temp_range() {
     .then((resp) => resp.json())
     .then((rData) => {
       console.log(rData)
-      minDat =Object.fromEntries(Object.entries(rData).filter(([key]) => key.includes('min')));
-      console.log('min: ' + minDat)
       function colRange(tempMin, tempMax) {
         var tempC = (tempMin + (tempMax)) / 2;
 
