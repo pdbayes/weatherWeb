@@ -46,9 +46,12 @@ function temp_range() {
 
         chart: {
           type: 'arearange',
-
-
-        },
+          zoomType: 'x',
+          scrollablePlotArea: {
+              minWidth: 600,
+              scrollPositionX: 1
+          }
+      },
 
         title: {
           text: 'Temperature Range',
@@ -93,9 +96,10 @@ function temp_range() {
           tickPositions: [0, 5, 10, 20, 25, 30, 35],
         },
 
-        series: [{
-          keys: ['x', 'high', 'low'],
-          data: data_a,
+        series:[{
+          name: 'Temperatures',
+          data: data,
+
           color: {
             linearGradient: { cx: 0, cy: 0.5, r: 1 },
             stops: [
