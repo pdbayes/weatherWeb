@@ -98,7 +98,7 @@ function temp_range() {
 
         series:[{
           name: 'Temperatures',
-          data: data,
+          data: data_a,
 
           color: {
             linearGradient: { cx: 0, cy: 0.5, r: 1 },
