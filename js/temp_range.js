@@ -37,9 +37,8 @@ function temp_range() {
       }
       // eslint-disable-next-line vars-on-top
       var data_a = rData.map((e) => {
-        var col = colRange(e.min, e.max);
         //console.log(col);
-        return [Date.parse(e.time), e.max, e.min, col];
+        return [Date.parse(e.time), e.max, e.min];
       });
       console.log(data_a);
 
@@ -47,15 +46,7 @@ function temp_range() {
 
         chart: {
           type: 'arearange',
-          polar: false,
-          events: {
-            load() {
-              var chart = this;
-              var extremes = chart.plotBox.y;
-              var yMin = chart.plotBox.y;
-              var yMax = chart.plotBox.y + chart.plotBox.height;
-            },
-          },
+
 
         },
 
@@ -106,7 +97,7 @@ function temp_range() {
           keys: ['x', 'high', 'low'],
           data: data_a,
           color: {
-            radialGradient: { cx: 0, cy: 0.5, r: 1 },
+            linearGradient: { cx: 0, cy: 0.5, r: 1 },
             stops: [
               [0, 'blue'],
               [1, 'red'],
