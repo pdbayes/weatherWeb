@@ -55,7 +55,40 @@ function temp_range() {
           polar: false,
           borderWidth: 1
       },
-
+      chartOptions: {
+      
+        xAxis: {
+          type: 'datetime',
+          gridLineColor: '#666666',
+          gridLineWidth: 0.5,
+          labels: {
+            style: {
+              color: '#f9f9f9',
+            },
+          },
+        },
+        yAxis: {
+          labels: {
+            align: 'left',
+            x: 0,
+            y: -2,
+          },
+          title: {
+            text: null,
+            style: {
+              color: '#f9f9f9',
+            },
+          },
+          lineWidth: 1,
+          min: minScale,
+          max: maxScale,
+          gridLineColor: '#666666',
+          gridLineWidth: 0.5,
+          title: {
+            text: null,
+          },
+        },
+      },
         title: {
           text: 'Temperature Range',
           style: {
@@ -69,7 +102,7 @@ function temp_range() {
         },
         plotOptions: {
           series: {
-            showInLegend: false
+            showInLegend: true
 
           },
         },
