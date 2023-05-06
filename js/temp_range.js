@@ -88,5 +88,6 @@ function temp_range() {
 
         }],
       });
+      rData=[]
     });
 }
