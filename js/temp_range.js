@@ -26,11 +26,7 @@ function temp_range() {
 
         chart: {
           type: 'arearange',
-          zoomType: 'x',
-          scrollablePlotArea: {
-              minWidth: 600,
-              scrollPositionX: 1
-          }
+          zoomType: 'x'
       },
 
         title: {
