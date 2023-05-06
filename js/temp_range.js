@@ -93,17 +93,7 @@ function temp_range() {
           showFirstLabel: false,
           tickPositions: [0, 5, 10, 20, 25, 30, 35],
         },
-        plotOptions: {
-          series: {
-              fillColor: {
-                  linearGradient: [0, 0, 0, 300],
-                  stops: [
-                      [0, Highcharts.getOptions().colors[0]],
-                      [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                  ]
-              }
-          }
-      },
+       
         series:[{
           name: 'Temperatures',
           data: data_a
