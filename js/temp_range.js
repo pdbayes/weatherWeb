@@ -21,13 +21,39 @@ function temp_range() {
         return [Date.parse(e.time), e.max, e.min];
       });
       console.log(data_a);
-
+      var stopCols = [
+        [0, 'rgb(213, 62, 79)'],
+        [0.1, 'rgb(244, 109, 67)'],
+        [0.15, 'rgb(253,174,97)'],
+        [0.2, 'rgb(254,224,139)'],
+        [0.25, 'rgb(255, 255, 191)'],
+        [0.3, 'rgb(230, 245, 152)'],
+        [0.4, 'rgb(171, 221, 164)'],
+        [0.45, 'rgb(102, 194, 165)'],
+        [1, 'rgb(50, 136, 189)'],
+      ];
       const chart = Highcharts.chart('range2', {
+        events: {
+          load() {
+            const chart = this;
+            const extremes = chart.plotBox.y;
+            const yMin = chart.plotBox.y;
+            const yMax = chart.plotBox.y + chart.plotBox.height;
 
+            chart.series[0].update({
+              color: {
+              // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                linearGradient: [0, yMin, 0, yMax],
+                stops: stopCols,
+              },
+            });
+          },
+        },
         chart: {
           type: 'arearange',
           zoomType: 'x',
-          polar: false
+          polar: false,
+          borderWidth: 1
       },
 
         title: {
@@ -39,9 +65,6 @@ function temp_range() {
           },
         },
         credits: {
-          enabled: false,
-        },
-        exporting: {
           enabled: false,
         },
         plotOptions: {
