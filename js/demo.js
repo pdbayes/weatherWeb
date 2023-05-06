@@ -40,7 +40,7 @@ function getData(path) {
         if (path === 'rain') {
           return [Date.parse(e.time), e.Rain];
         } if (path === 'wind') {
-          return [Date.parse(e.time), e.mean, e.max];
+          return [Date.parse(e.time), e.Speed, e.Gust];
         }
         if (path === 'temp/7d') {
           return [Date.parse(e.time), e.temperature, e.kitTemp];
