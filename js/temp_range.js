@@ -80,8 +80,8 @@ function temp_range() {
             },
           },
           lineWidth: 1,
-          min: minScale,
-          max: maxScale,
+          min: -5,
+          max: 35,
           gridLineColor: '#666666',
           gridLineWidth: 0.5,
           title: {
