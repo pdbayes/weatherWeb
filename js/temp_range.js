@@ -15,27 +15,6 @@ function temp_range() {
 
     .then((resp) => resp.json())
     .then((rData) => {
-      console.log(rData)
-      function colRange(tempMin, tempMax) {
-        var tempC = (tempMin + (tempMax)) / 2;
-
-        mid = 17;
-        b = 0;
-
-        if (tempC <= mid) {
-          tempC = (tempMin + (tempMax * 2)) / 2;
-          // green to yellow
-          r = Math.floor(255 * (tempC / mid));
-          g = 255;
-        } else {
-          // yellow to red
-          r = 255;
-          g = Math.floor(255 * ((mid - (tempC - 1) % mid) / mid));
-        }
-
-        return `RGB(${r},${g},${b})`;
-      }
-      // eslint-disable-next-line vars-on-top
       var data_a = rData.map((e) => {
         //console.log(col);
         return [Date.parse(e.time), e.max, e.min];
@@ -69,9 +48,7 @@ function temp_range() {
         },
         plotOptions: {
           series: {
-            showInLegend: false,
-            turboThreshold: 0,
-            stacking: 'normal',
+            showInLegend: false
 
           },
         },
