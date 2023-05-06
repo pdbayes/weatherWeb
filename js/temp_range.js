@@ -111,21 +111,6 @@ function temp_range() {
           headerFormat: '<small>{point.x:%d %B, %Y}</small>',
           pointFormat: '<table>\n  <tr>\n    <th>low</th>\n    <td>{point.low}</td>\n  </tr>\n  <tr>\n    <th>high</th>\n    <td>{point.high}</td>\n  </tr>\n</table>',
         },
-
-        xAxis: {
-          gridLineWidth: 0.5,
-          type: 'datetime',
-          tickInterval: 2592000000,
-          labels: {
-            format: '{value: %b}',
-          },
-        },
-        yAxis: {
-          max: 40,
-          min: -5,
-          showFirstLabel: false,
-          tickPositions: [0, 5, 10, 20, 25, 30, 35],
-        },
        
         series:[{
           name: 'Temperatures',
