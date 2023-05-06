@@ -116,7 +116,7 @@ function speed() {
 
     },
     (chart) => {
-      const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
+      const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/currentSpeed';
       fetch(url, {
         credentials: 'include',
         credentials: 'same-origin',
@@ -135,7 +135,7 @@ function speed() {
         .then((chart) => {
           if (!chart.renderer.forExport) {
             setInterval(() => {
-              const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
+              const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/currentSpeed';
               fetch(url, {
                 credentials: 'include',
                 credentials: 'same-origin',
@@ -145,7 +145,7 @@ function speed() {
                 .then((data) => {
                   var speed = data.map((e) => e.Speed);
                   var speed_point = chart.series[0].points[0];
-                  let speedVal;
+                   var speedVal;
                   speedVal = speed;
                   console.log(speedVal);
                   speed_point.update(speedVal);

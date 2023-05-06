@@ -201,7 +201,7 @@ function compass() {
     },
 
     (chart) => {
-      const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
+      const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/currentDir';
       fetch(url, {
         credentials: 'include',
         credentials: 'same-origin',
@@ -221,7 +221,7 @@ function compass() {
         .then((chart) => {
           if (!chart.renderer.forExport) {
             setInterval(() => {
-              const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/current';
+              const url = 'https://weathernode.tregrillfarmcottages.co.uk/wind/currentDir';
               fetch(url, {
                 credentials: 'include',
                 credentials: 'same-origin',
