@@ -44,7 +44,7 @@ function temp_range() {
             ]
           },
         },
-
+      },
         title: {
           text: 'Temperature Range',
           style: {
