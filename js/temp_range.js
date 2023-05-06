@@ -47,7 +47,7 @@ function temp_range() {
 
         chart: {
           type: 'columnrange',
-          polar: false,
+          polar: true,
           events: {
             load() {
               var chart = this;
