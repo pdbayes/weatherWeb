@@ -40,7 +40,7 @@ function temp_range() {
             const yMin = chart.plotBox.y;
             const yMax = chart.plotBox.y + chart.plotBox.height;
 
-            chart.series[0].update({
+            chart.load({
               color: {
               // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
                 linearGradient: [0, yMin, 0, yMax],
