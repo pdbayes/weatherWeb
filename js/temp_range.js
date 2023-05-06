@@ -46,7 +46,7 @@ function temp_range() {
       const chart = Highcharts.chart('range2', {
 
         chart: {
-          type: 'columnrange',
+          type: 'arearange',
           polar: false,
           events: {
             load() {
