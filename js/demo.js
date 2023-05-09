@@ -45,9 +45,6 @@ function getData(path) {
         if (path === 'temp/7d') {
           return [Date.parse(e.time), e.temperature, e.kitTemp];
         }
-        if (path === 'range') {
-          return [Date.parse(e.time), e.min];
-        }
         if (path === 'humidity') {
           return [Date.parse(e.time), e.humidity];
         }
