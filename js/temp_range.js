@@ -16,12 +16,12 @@ function temp_range() {
     .then((resp) => resp.json())
     .then((rData) => {
       console.log('rdata: ' + rData)
-      var range = []
+      var range = new Array()
       range=rData.map((e) => {
         //console.log(col);
         return [Date.parse(e.time), e.max, e.min];
       });
-      var average = []
+      var average = new Array()
       average=rData.map((e) => {
         //console.log(col);
         return [Date.parse(e.time), (e.max + e.min)/2];
