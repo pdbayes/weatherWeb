@@ -50,7 +50,7 @@ function temp_range() {
           },
         },
         chart: {
-          type: 'arearange',
+          type: 'areasplinerange',
           zoomType: 'x',
           polar: false,
           borderWidth: 1
