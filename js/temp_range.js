@@ -123,5 +123,7 @@ function temp_range() {
         }],
       });
       rData=[]
+      data_a=[]
+      data_b=[]
     });
 }
