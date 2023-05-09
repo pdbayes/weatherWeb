@@ -15,21 +15,19 @@ function temp_range() {
 
     .then((resp) => resp.json())
     .then((rData) => {
-      console.log('rdata: ' + rData)
-      var range = new Array()
-      range=rData.map((e) => {
+      console.log(rData)
+      let data_a = rData.map((e) => {
         //console.log(col);
         return [Date.parse(e.time), e.max, e.min];
       });
-      var average = new Array()
-      average=rData.map((e) => {
+      let data_b = rData.map((e) => {
         //console.log(col);
-        return [Date.parse(e.time), (e.max + e.min)/2];
+        return [Date.parse(e.time), (e.max * e.min)/2];
       });
-     // range.sort(function(a, b){return a - b});
-     // average.sort(function(a, b){return a - b});
+      data_a.sort(function(a, b){return a - b});
+      data_b.sort(function(a, b){return a - b});
       
-      console.log('ave: ' + average);
+      console.log(data_b);
       var stopCols = [
         [0, 'rgb(213, 62, 79)'],
         [0.1, 'rgb(244, 109, 67)'],
@@ -131,7 +129,7 @@ function temp_range() {
       
         series: [{
           name: 'Average',
-          data: average,
+          data: data_b,
           type: 'line',
           zIndex: 1,
           marker: {
@@ -141,7 +139,7 @@ function temp_range() {
           }
         }, {
           name: 'Temperature Range',
-          data: range,
+          data: data_a,
           type: 'areasplinerange',
           linewidth: 0,
           linkedTo: ':previous',
@@ -154,7 +152,7 @@ function temp_range() {
         }],
       });
       rData=[]
-      range=[]
-      average=[]
+      data_a=[]
+      data_b=[]
     });
 }
