@@ -16,11 +16,13 @@ function temp_range() {
     .then((resp) => resp.json())
     .then((rData) => {
       console.log(rData)
-      var data_a = rData.map((e) => {
+      var data_a = []
+      data_a=rData.map((e) => {
         //console.log(col);
         return [Date.parse(e.time), e.max, e.min];
       });
-      var data_b = rData.map((e) => {
+      var data_b = []
+      data_b=rData.map((e) => {
         //console.log(col);
         return [Date.parse(e.time), (e.max * e.min)/2];
       });
