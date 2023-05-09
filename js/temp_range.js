@@ -116,10 +116,36 @@ function temp_range() {
           pointFormat: '<table>\n  <tr>\n    <th>low</th>\n    <td>{point.low}</td>\n  </tr>\n  <tr>\n    <th>high</th>\n    <td>{point.high}</td>\n  </tr>\n</table>',
         },
        
-        series:[{
-          name: 'Temperatures',
-          data: data_a
-
+        chart: {
+          borderRadius: 10,
+          spacingBottom: 30,
+          spacingTop: 30,
+          spacingLeft: 30,
+          spacingRight: 30
+        },
+      
+        series: [{
+          name: 'Average',
+          data: data_b,
+          type: 'line',
+          zIndex: 1,
+          marker: {
+            fillColor: 'white',
+            lineWidth: 2,
+            lineColor: Highcharts.getOptions().colors[0]
+          }
+        }, {
+          name: 'Temperature Range',
+          data: data_a,
+          type: 'areasplinerange',
+          linewidth: 0,
+          linkedTo: ':previous',
+          color: Highcharts.getOptions().colors[0],
+          fillOpacity: 0.3,
+          zIndex: 0,
+          marker: {
+            enabled: false
+          }
         }],
       });
       rData=[]
