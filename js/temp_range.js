@@ -15,7 +15,7 @@ function temp_range() {
 
     .then((resp) => resp.json())
     .then((rData) => {
-      console.log(rData)
+      console.log('rdata: ' + rData)
       var range = []
       range=rData.map((e) => {
         //console.log(col);
@@ -29,7 +29,7 @@ function temp_range() {
       range.sort(function(a, b){return a - b});
       average.sort(function(a, b){return a - b});
       
-      console.log(average);
+      console.log('ave: ' + average);
       var stopCols = [
         [0, 'rgb(213, 62, 79)'],
         [0.1, 'rgb(244, 109, 67)'],
