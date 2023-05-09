@@ -24,7 +24,7 @@ function temp_range() {
       var average = []
       average=rData.map((e) => {
         //console.log(col);
-        return [Date.parse(e.time), (e.max * e.min)/2];
+        return [Date.parse(e.time), (e.max + e.min)/2];
       });
       range.sort(function(a, b){return a - b});
       average.sort(function(a, b){return a - b});
