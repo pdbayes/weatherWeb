@@ -20,7 +20,11 @@ function temp_range() {
         //console.log(col);
         return [Date.parse(e.time), e.max, e.min];
       });
-      console.log(data_a);
+      var data_b = rData.map((e) => {
+        //console.log(col);
+        return [Date.parse(e.time), (e.max * e.min)/2];
+      });
+      console.log(data_b);
       var stopCols = [
         [0, 'rgb(213, 62, 79)'],
         [0.1, 'rgb(244, 109, 67)'],
