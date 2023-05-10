@@ -493,7 +493,6 @@ function getData(path) {
         },
       });
     })
-    .then(temp_ranege())
     .catch(() => {
     // catch any errors
     });
