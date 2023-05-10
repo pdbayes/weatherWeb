@@ -15,7 +15,7 @@ function temp_range() {
 
     .then((resp) => resp.json())
     .then((rData) => {
-      rData.splice(0, removeEventListener.length - 4);
+      rData.splice(0, rData.length - 4);
       console.log(rData)
       let data_a = rData.map((e) => {
         //console.log(col);
