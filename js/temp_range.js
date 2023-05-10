@@ -23,7 +23,7 @@ function temp_range() {
       });
       let data_b = rData.map((e) => {
         //console.log(col);
-        return [Date.parse(e.time), (e.max * e.min)/2];
+        return [Date.parse(e.time), (e.max + e.min)/2];
       });
       data_a.sort(function(a, b){return a - b});
       data_b.sort(function(a, b){return a - b});
