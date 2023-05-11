@@ -28,7 +28,7 @@ function temp_range() {
       });
       data_a.sort(function(a, b){return a - b});
       data_b.sort(function(a, b){return a - b});
-      
+      console.log(data_a);
       console.log(data_b);
       var stopCols = [
         [0, 'rgb(213, 62, 79)'],
