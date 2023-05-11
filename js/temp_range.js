@@ -65,7 +65,7 @@ function temp_range() {
           polar: false,
           borderWidth: 1
       },
-      chartOptions: {
+      
       
         xAxis: {
           type: 'datetime',
@@ -98,7 +98,7 @@ function temp_range() {
             text: null,
           },
         },
-      },
+      
         title: {
           text: 'Temperature Range',
           style: {
@@ -121,11 +121,7 @@ function temp_range() {
         },
        
         chart: {
-          borderWidth: 1,
-          spacingBottom: 30,
-          spacingTop: 30,
-          spacingLeft: 30,
-          spacingRight: 30
+          borderWidth: 1
         },
       
         series: [{
