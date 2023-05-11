@@ -26,8 +26,8 @@ function temp_range() {
         //console.log(col);
         return [e.time, (e.max + e.min)/2];
       });
-      data_a.sort(function(a, b){return a - b});
-      data_b.sort(function(a, b){return a - b});
+      //data_a.sort(function(a, b){return a - b});
+      //data_b.sort(function(a, b){return a - b});
       console.log(data_a);
       console.log(data_b);
       var stopCols = [
@@ -43,6 +43,7 @@ function temp_range() {
       ];
       let unit = "C"
       const chart = Highcharts.chart('range2', {
+        chart: {
         events: {
           load() {
             const chart = this;
@@ -59,12 +60,12 @@ function temp_range() {
             });
           },
         },
-        chart: {
+        
           type: 'areasplinerange',
           zoomType: 'x',
           polar: false,
-          borderWidth: 1
-      },
+          borderWidth: 1,
+      
       
       
         xAxis: {
@@ -119,10 +120,6 @@ function temp_range() {
         tooltip: {
           pointFormat: `{point.y} ${unit}`
         },
-       
-        chart: {
-          borderWidth: 1
-        },
       
         series: [{
           name: 'Average',
@@ -147,7 +144,9 @@ function temp_range() {
             enabled: false
           }
         }],
+      }
       });
+    
       rData=[]
       data_a=[]
       data_b=[]
