@@ -15,7 +15,6 @@ function temp_range() {
 
     .then((resp) => resp.json())
     .then((rData) => {
-      //rData.splice(0, rData.length - 4);
       console.log(rData)
       let data_a = rData.map((e) => {
         //console.log(col);
@@ -43,22 +42,7 @@ function temp_range() {
       ];
       let unit = "C"
       const chart = Highcharts.chart('range2', {
-        events: {
-          load() {
-            const chart = this;
-            const extremes = chart.plotBox.y;
-            const yMin = chart.plotBox.y;
-            const yMax = chart.plotBox.y + chart.plotBox.height;
-
-            chart.load({
-              color: {
-              // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                linearGradient: [0, yMin, 0, yMax],
-                stops: stopCols,
-              },
-            });
-          },
-        },
+        
         chart: {
           type: 'areasplinerange',
           zoomType: 'x',
