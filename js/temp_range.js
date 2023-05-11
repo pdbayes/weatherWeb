@@ -121,7 +121,7 @@ function temp_range() {
         },
        
         chart: {
-          borderRadius: 10,
+          borderWidth: 1,
           spacingBottom: 30,
           spacingTop: 30,
           spacingLeft: 30,
