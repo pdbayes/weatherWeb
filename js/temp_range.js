@@ -44,15 +44,18 @@ function temp_range() {
       let unit = "C"
       const chart = Highcharts.chart('range2', {
         chart: {
-       
+
+        
         
           type: 'areasplinerange',
           zoomType: 'x',
           polar: false,
-          borderWidth: 1,
+          borderWidth: 1
+      },
       
-      
-      
+      legend,
+
+        margin: [0, 0, 0, 0],
         xAxis: {
           type: 'datetime',
           gridLineColor: '#666666',
@@ -96,12 +99,7 @@ function temp_range() {
         credits: {
           enabled: false,
         },
-        plotOptions: {
-          series: {
-            showInLegend: true
 
-          },
-        },
         tooltip: {
           pointFormat: `{point.y} ${unit}`
         },
@@ -129,9 +127,7 @@ function temp_range() {
             enabled: false
           }
         }],
-      }
       });
-    
       rData=[]
       data_a=[]
       data_b=[]
