@@ -40,6 +40,7 @@ function temp_range() {
         [0.45, 'rgb(102, 194, 165)'],
         [1, 'rgb(50, 136, 189)'],
       ];
+      let unit = "C"
       const chart = Highcharts.chart('range2', {
         events: {
           load() {
@@ -115,9 +116,7 @@ function temp_range() {
           },
         },
         tooltip: {
-          useHTML: true,
-          headerFormat: '<small>{point.x:%d %B, %Y}</small>',
-          pointFormat: '<table>\n  <tr>\n    <th>low</th>\n    <td>{point.low}</td>\n  </tr>\n  <tr>\n    <th>high</th>\n    <td>{point.high}</td>\n  </tr>\n</table>',
+          pointFormat: `{point.y} ${unit}`
         },
        
         chart: {
