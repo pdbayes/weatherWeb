@@ -26,8 +26,8 @@ function temp_range() {
         //console.log(col);
         return [e.time, (e.max + e.min)/2];
       });
-      //data_a.sort(function(a, b){return a - b});
-      //data_b.sort(function(a, b){return a - b});
+      data_a.sort(function(a, b){return a - b});
+      data_b.sort(function(a, b){return a - b});
       console.log(data_a);
       console.log(data_b);
       var stopCols = [
@@ -43,19 +43,30 @@ function temp_range() {
       ];
       let unit = "C"
       const chart = Highcharts.chart('range2', {
-        chart: {
+        events: {
+          load() {
+            const chart = this;
+            const extremes = chart.plotBox.y;
+            const yMin = chart.plotBox.y;
+            const yMax = chart.plotBox.y + chart.plotBox.height;
 
-        
-        
+            chart.load({
+              color: {
+              // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                linearGradient: [0, yMin, 0, yMax],
+                stops: stopCols,
+              },
+            });
+          },
+        },
+        chart: {
           type: 'areasplinerange',
           zoomType: 'x',
           polar: false,
           borderWidth: 1
       },
       
-      legend,
-
-        margin: [0, 0, 0, 0],
+      
         xAxis: {
           type: 'datetime',
           gridLineColor: '#666666',
@@ -99,9 +110,18 @@ function temp_range() {
         credits: {
           enabled: false,
         },
+        plotOptions: {
+          series: {
+            showInLegend: true
 
+          },
+        },
         tooltip: {
           pointFormat: `{point.y} ${unit}`
+        },
+       
+        chart: {
+          borderWidth: 1
         },
       
         series: [{
