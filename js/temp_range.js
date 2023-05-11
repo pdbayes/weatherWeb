@@ -44,22 +44,7 @@ function temp_range() {
       let unit = "C"
       const chart = Highcharts.chart('range2', {
         chart: {
-        events: {
-          load() {
-            const chart = this;
-            const extremes = chart.plotBox.y;
-            const yMin = chart.plotBox.y;
-            const yMax = chart.plotBox.y + chart.plotBox.height;
-
-            chart.load({
-              color: {
-              // linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                linearGradient: [0, yMin, 0, yMax],
-                stops: stopCols,
-              },
-            });
-          },
-        },
+       
         
           type: 'areasplinerange',
           zoomType: 'x',
