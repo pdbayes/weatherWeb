@@ -128,7 +128,7 @@ function temp_range() {
           fillOpacity: 0.3,
           zIndex: 0,
           marker: {
-            enabled: false
+            enabled: true
           }
         }],
       });
