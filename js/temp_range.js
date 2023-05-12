@@ -114,7 +114,9 @@ function temp_range() {
           fillOpacity: 0.3,
           zIndex: 0,
           marker: {
-            enabled: true
+            fillColor: 'yellow',
+            lineWidth: 2,
+            lineColor: Highcharts.getOptions().colors[0]
           }
         }],
         responsive: {
