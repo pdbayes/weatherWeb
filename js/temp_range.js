@@ -29,22 +29,11 @@ function temp_range() {
       data_b.sort(function(a, b){return a - b});
       console.log(data_a);
       console.log(data_b);
-      var stopCols = [
-        [0, 'rgb(213, 62, 79)'],
-        [0.1, 'rgb(244, 109, 67)'],
-        [0.15, 'rgb(253,174,97)'],
-        [0.2, 'rgb(254,224,139)'],
-        [0.25, 'rgb(255, 255, 191)'],
-        [0.3, 'rgb(230, 245, 152)'],
-        [0.4, 'rgb(171, 221, 164)'],
-        [0.45, 'rgb(102, 194, 165)'],
-        [1, 'rgb(50, 136, 189)'],
-      ];
       let unit = "C"
       const chart = Highcharts.chart('range2', {
         
         chart: {
-          type: 'areasplinerange',
+          
           zoomType: 'x',
           polar: false,
           borderWidth: 1
