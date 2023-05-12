@@ -25,8 +25,8 @@ function temp_range() {
         //console.log(col);
         return [e.time, (e.max + e.min)/2];
       });
-      data_a.sort(function(a, b){return a - b});
-      data_b.sort(function(a, b){return a - b});
+      //data_a.sort(function(a, b){return a - b});
+      //data_b.sort(function(a, b){return a - b});
       console.log(data_a);
       console.log(data_b);
       let unit = "C"
@@ -84,10 +84,7 @@ function temp_range() {
           enabled: false,
         },
         plotOptions: {
-          series: {
-            showInLegend: true
-
-          },
+          
         },
         tooltip: {
           pointFormat: `{point.y} ${unit}`
