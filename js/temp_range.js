@@ -17,13 +17,13 @@ function temp_range() {
     .then((rData) => {
       console.log(rData)
       let data_a = rData.map((e) => {
-        //console.log(col);
+        
         return [Date.parse(e.time), e.max, e.min];
         //return [e.time, e.max, e.min];
       });
       let data_b = rData.map((e) => {
         //console.log(col);
-        return [e.time, (e.max + e.min)/2];
+        return [Date.parse(e.time), (e.max + e.min)/2];
       });
 
       console.log(data_a);
@@ -51,6 +51,7 @@ function temp_range() {
         },
         yAxis: {
           labels: {
+            format: `{value}${unit}`,
             align: 'left',
             x: 0,
             y: -2,
