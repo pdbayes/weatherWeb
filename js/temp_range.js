@@ -117,6 +117,91 @@ function temp_range() {
             enabled: true
           }
         }],
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 500,
+            },
+            // Make the labels less space demanding on mobile
+            chartOptions: {
+              xAxis: {
+                type: 'datetime',
+                gridLineColor: '#666666',
+                gridLineWidth: 0.5,
+                labels: {
+                  style: {
+                    color: '#f9f9f9',
+                  },
+                },
+              },
+              yAxis: {
+                labels: {
+                  align: 'left',
+                  x: 0,
+                  y: -2,
+                },
+                title: {
+                  text: null,
+                  style: {
+                    color: '#f9f9f9',
+                  },
+                },
+                lineWidth: 1,
+                min: minScale,
+                max: maxScale,
+                gridLineColor: '#666666',
+                gridLineWidth: 0.5,
+                title: {
+                  text: null,
+                },
+              },
+            },
+          }, {
+            condition: {
+              minWidth: 501,
+            },
+            chartOptions: {
+              xAxis: [{
+                id: '0',
+
+                type: 'datetime',
+                gridLineColor: '#666666',
+                gridLineWidth: 0.5,
+                labels: {
+                  style: {
+                    color: '#f9f9f9',
+                  },
+                },
+              }, {
+                id: '1',
+                type: 'datetime',
+                visible: false,
+                linkedTo: '0',
+              }],
+              yAxis: {
+                labels: {
+                  align: 'right',
+                  x: -15,
+                  y: 0,
+                  style: {
+                    color: '#f9f9f9',
+                  },
+                },
+                title: {
+                  text: null,
+                },
+                lineWidth: 1,
+                min: minScale,
+                max: maxScale,
+                gridLineColor: '#666666',
+                gridLineWidth: 0.5,
+                title: {
+                  text: null,
+                },
+              },
+            },
+          }],
+        },
       });
       rData=[]
       data_a=[]
