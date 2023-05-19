@@ -7,7 +7,7 @@
 /* eslint-disable no-unused-vars */
 function pressure_rate() {
   const pressure_chart = Highcharts.chart(
-    'pressure',
+    'pressure_change',
     {
       chart: {
         type: 'gauge',
@@ -18,7 +18,7 @@ function pressure_rate() {
       },
 
       title: {
-        text: 'Pressure',
+        text: 'Pressure change Rate',
         style: {
           color: '#fff',
           fontWeight: 'bold',
