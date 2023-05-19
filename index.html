@@ -19,6 +19,7 @@
    <script src ="js/temperature.js"></script>
    <script src ="js/kitTemp.js"></script>
    <script src ="js/pressure.js"></script>
+   <script src ="js/pressure_change.js"></script>
    <!--<link rel="stylesheet" href="fixed-navigation-bar.css"> -->
    <!--<link rel="stylesheet" href="assets/base.css"> -->
 
@@ -44,6 +45,7 @@
          <div id="kitTemp"></div>
          <div id="humidity"></div>
          <div id="pressure"></div>
+         <div id ="pressure_change"></div>
          <div id="compass"></div>
          <div id="speed"></div>
          
@@ -54,6 +56,7 @@ $( document ).ready(function() {
     console.log( "ready!" );
     temperature();
     pressure();
+    pressure_change();
     compass();
     speed();
     humidity();
