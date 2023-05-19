@@ -123,7 +123,7 @@ function pressure_rate() {
       }],
     },
     (chart) => {
-      const url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure/change';
+      const url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure';
       fetch(url, {
         credentials: 'include',
         credentials: 'same-origin',
@@ -132,6 +132,7 @@ function pressure_rate() {
         .then((resp) => resp.json())
         .then((data) => {
           const speed = data.map((e) => e.pressure);
+          console.log('difference: ' = speed.last - speed.first)
           const speed_point = chart.series[0].points[0];
           let speedVal;
           speedVal = speed;
@@ -142,7 +143,7 @@ function pressure_rate() {
         .then((chart) => {
           if (!chart.renderer.forExport) {
             setInterval(() => {
-              const url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure/change';
+              const url = 'https://weathernode.tregrillfarmcottages.co.uk/pressure';
               fetch(url, {
                 credentials: 'include',
                 credentials: 'same-origin',
