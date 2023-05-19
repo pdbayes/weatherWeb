@@ -93,14 +93,22 @@ function pressure_rate() {
         },
         plotBands: [{
           from: -10,
-          to: -5,
+          to: -8,
+          color: '#DF5353', // red
+        }, {
+          from: -8,
+          to: -4,
+          color: '#DDDF0D', // yellow
+        },{
+          from: -4,
+          to: 4,
           color: '#55BF3B', // green
         }, {
-          from: -5,
-          to: 5,
+          from: 4,
+          to: 8,
           color: '#DDDF0D', // yellow
-        }, {
-          from: 5,
+        },  {
+          from: 8,
           to: 10,
           color: '#DF5353', // red
         }],
