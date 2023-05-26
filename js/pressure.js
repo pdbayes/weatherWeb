@@ -123,7 +123,7 @@ function pressure() {
 
         .then((resp) => resp.json())
         .then((data) => {
-          const speed = data.map((e) => e.pressure);
+          const speed = data.map((e) => +(e.pressure.toFixed()));
           const speed_point = chart.series[0].points[0];
           let speedVal;
           speedVal = speed;
@@ -142,7 +142,7 @@ function pressure() {
 
                 .then((resp) => resp.json())
                 .then((data) => {
-                  const speed = data.map((e) => e.pressure);
+                  const speed = data.map((e) => +(e.pressure.toFixed()));
                   const speed_point = chart.series[0].points[0];
                   let speedVal;
                   speedVal = speed;
