@@ -49,7 +49,7 @@ function getData(path) {
           return [Date.parse(e.time), e.humidity];
         }
         if (path === 'pressure') {
-          return [Date.parse(e.time), e.pressure];
+          return [Date.parse(e.time), e.pressure.toFixed()];
         }
         return [Date.parse(e.time), e.mean];
       });
