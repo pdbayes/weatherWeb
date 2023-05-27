@@ -46,12 +46,12 @@ function getData(path) {
           return [Date.parse(e.time), e.temperature, e.kitTemp];
         }
         if (path === 'humidity') {
-          return [Date.parse(e.time), e.humidity.toFixed()];
+          return [Date.parse(e.time), e.humidity];
         }
         if (path === 'pressure') {
-          return [Date.parse(e.time), e.pressure.toFixed()];
+          return [Date.parse(e.time), e.pressure];
         }
-        return [Date.parse(e.time), e.mean.toFixed(2)];
+        return [Date.parse(e.time), e.mean];
       });
       console.log(data_a);
       // var current = data_a[data_a.len - 1][1];
