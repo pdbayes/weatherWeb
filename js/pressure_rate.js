@@ -132,7 +132,8 @@ function pressure_rate() {
         .then((resp) => resp.json())
         .then((data) => {
           let speed = data.map((e) => e.pressure);
-          console.log(speed[0] - speed[speed.length -1])
+          console.log(speed[0])
+          console.log(speed[speed.length -1])
           const speed_point = chart.series[0].points[0];
           let speedVal;
           speedVal = (speed[0] - speed[speed.length -1]);
