@@ -123,7 +123,7 @@ function humidity() {
 
         .then((resp) => resp.json())
         .then((data) => {
-          const speed = data.map((e) => e.humidity);
+          const speed = data.map((e) => +(e.humidity.toFixed()));
           const speed_point = chart.series[0].points[0];
           let speedVal;
           speedVal = speed;
