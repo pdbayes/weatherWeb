@@ -4,7 +4,15 @@
     height: 310px;
     margin: 0 auto;
   }
-  
+  .z_container {
+    width:100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    /* grid-gap: 1rem; */
+    align-items: start;
+    justify-content: space-between;
+    justify-items: center;
+}
   #loading {
     margin-top: 100px;
     text-align: center;
