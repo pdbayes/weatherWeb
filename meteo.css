@@ -4,7 +4,7 @@
     height: 310px;
     margin: 0 auto;
   }
-  .z_container {
+  .f_wrapper {
     width:100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
