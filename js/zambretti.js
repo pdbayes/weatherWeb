@@ -179,7 +179,7 @@ async function get_forecast() {
 	let month = d.getMonth()
 	let forecast = betel_cast(pressureNow, month, windNow, pTrend, 1050, 950);
 	console.log(forecast);
-	$('#z_forecast').html(forecast);
+	$('#z_forecast').html(forecast[0]);
 	return forecast
 };
 
