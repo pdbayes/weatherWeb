@@ -64,3 +64,17 @@
   .highcharts-data-labels {
    font-weight: 600;
   }
+
+  .z_forecast {
+
+    display: block;
+
+  }
+
+  .z_text {
+
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+
+  }
