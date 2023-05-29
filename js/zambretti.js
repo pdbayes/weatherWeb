@@ -179,9 +179,13 @@ async function get_forecast() {
 	let month = d.getMonth()
 	let forecast = betel_cast(pressureNow, month, windNow, pTrend, 1050, 950);
 	console.log(forecast);
+	$('#z_forecast').html(forecast);
 	return forecast
 };
-console.log(get_forecast());
+
+let z_out = get_forecast()
+console.log(z_out);
+
 let icon
 
 // determine the forecast and return an emoji representing it
