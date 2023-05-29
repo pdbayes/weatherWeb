@@ -65,18 +65,19 @@
    font-weight: 600;
   }
 
-  .z_forecast {
 
-    display: grid;
-    grid-template-columns:1fr;
-    grid-template-rows:1fr 1fr;
+
+
+  .z_forecast {
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    align-content: center;
 
   }
-
   .z_text {
-
-    text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bolder;
-
+    height: 100%;
+    vertical-align: top;
+    font-size: 2em;
+    align-content: stretch;
   }
