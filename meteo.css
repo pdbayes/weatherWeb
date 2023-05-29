@@ -5,7 +5,8 @@
     margin: 0 auto;
   }
   .f_wrapper {
-    width:100%;
+    max-height: 100%;
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     /* grid-gap: 1rem; */
@@ -69,6 +70,8 @@
 
 
   .z_forecast {
+    max-height: 100%;
+    max-width: 100%;
     align-items: center;
     height: 100%;
     width: 100%;
@@ -76,6 +79,8 @@
 
   }
   .z_text {
+    max-height: 100%;
+    max-width: 100%;
     height: 100%;
     vertical-align: top;
     font-size: 2em;
