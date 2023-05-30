@@ -33,7 +33,7 @@ function trend(cRate) {
 	else { return 0 }
 }
 var z_forecast = new Array("Settled fine", "Fine weather", "Becoming fine", "Fine, becoming less settled", "Fine, possible showers", "Fairly fine, improving", "Fairly fine, possible showers early", "Fairly fine, showery later", "Showery early, improving", "Changeable, mending", "Fairly fine, showers likely", "Rather unsettled clearing later", "Unsettled, probably improving", "Showery, bright intervals", "Showery, becoming less settled", "Changeable, some rain", "Unsettled, short fine intervals", "Unsettled, rain later", "Unsettled, some rain", "Mostly very unsettled", "Occasional rain, worsening", "Rain at times, very unsettled", "Rain at frequent intervals", "Rain, very unsettled", "Stormy, may improve", "Stormy, much rain");
-
+var z_icons = new Array("images/day_clear.svg", "images/day_clear.svg", "images/day_partial_cloud.svg", "images/day_partial_cloud.svg", "images/angry_clouds.svg", "images/day_partial_cloud.svg", "day_partial_cloud.svg", "day_partial_cloud.svg", "day_partial_cloud.svg", "day_partial_cloud.svg", "day_partial_cloud.svg", "day_partial_cloud.svg", "day_partial_cloud.svg", "rain.svg", "rain.svg", "rain.svg", "day_partial_cloud.svg", "angry_clouds.svg", "angry_clouds.svg", "angry_clouds.svg", "angry_clouds.svg", "rain.svg", "rain.svg", "rain.svg", "thunder.svg", "thunder.svg");
 // equivalents of Zambretti 'dial window' letters A - Z
 var rise_options = new Array(25, 25, 25, 24, 24, 19, 16, 12, 11, 9, 8, 6, 5, 2, 1, 1, 0, 0, 0, 0, 0, 0);
 var steady_options = new Array(25, 25, 25, 25, 25, 25, 23, 23, 22, 18, 15, 13, 10, 4, 1, 1, 0, 0, 0, 0, 0, 0);
@@ -179,7 +179,9 @@ async function get_forecast() {
 	let month = d.getMonth()
 	let forecast = betel_cast(pressureNow, month, windNow, pTrend, 1050, 950);
 	console.log(forecast);
+	let background_image = z_icons[forecast[1]];
 	$('#z_forecast').html(forecast[0]);
+	$("z_forecast").css("background-image", url(background_image))
 	return forecast
 };
 
