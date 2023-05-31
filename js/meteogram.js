@@ -300,7 +300,7 @@ Meteogram.prototype.getChartOptions = function () {
       height: 310,
       alignTicks: false,
       scrollablePlotArea: {
-        minWidth: 720,
+        minWidth: 0,
       },
     },
 

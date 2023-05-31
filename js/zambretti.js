@@ -181,7 +181,7 @@ async function get_forecast() {
 	console.log(forecast);
 	let background_image = z_icons[forecast[1]];
 	$('#z_forecast').html(forecast[0]);
-	$("z_forecast").css("background-image", url(background_image))
+	$("z_forecast").css("background-image", "url(background_image)")
 	return forecast
 };
 
